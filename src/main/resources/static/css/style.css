@@ -3,11 +3,15 @@
 #wrap{
 	width:1200px;
 	height:900px;
+	margin: 0 auto;
 }
 
 header {
 	height:100px;
 	background-color:#EBEDF0;
+}
+.menu {
+	height:800px;
 }
 
 .pacifico-regular {
@@ -15,6 +19,28 @@ header {
   font-weight: 400;
   font-style: normal;
 }
+/* <uniquifier>: Use a unique and descriptive class name
+ <weight>: Use a value from 100 to 900*/
+
+.noto-sans-kr {
+  font-family: "Noto Sans KR", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.abeezee-regular {
+  font-family: "ABeeZee", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.abeezee-regular-italic {
+  font-family: "ABeeZee", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
 
 
 .contents {
@@ -22,10 +48,28 @@ header {
 	height:800px;*/
 }
 .contents > .main {
-	/*width:600px;
-	height: 600px;*/
+	width:500px;
+	height: 700px;
 	background-color:#F5FEFB;
 }
+
+.contents > .story {
+	width:900px;
+	height:100px;
+	background-color:#FFF9F9;
+}
+.post {
+	width:450px;
+	height:650px;
+}
+
+.post-image {
+	width:450px;
+	height:450px;
+	background-color:#FFF9F9;
+	object-fit: contain;
+}
+
 .btn1 {
 	background-color:#E3D3D3;
 }
@@ -40,3 +84,5 @@ footer {
 /*
 https://codingapple.com/unit/html-18-webfont/
 */
+/* Home */
+
