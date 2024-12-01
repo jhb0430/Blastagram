@@ -4,3 +4,39 @@
 	width:1200px;
 	height:900px;
 }
+
+header {
+	height:100px;
+	background-color:#EBEDF0;
+}
+
+.pacifico-regular {
+  font-family: "Pacifico", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+.contents {
+	/*width:1200px;
+	height:800px;*/
+}
+.contents > .main {
+	/*width:600px;
+	height: 600px;*/
+	background-color:#F5FEFB;
+}
+.btn1 {
+	background-color:#E3D3D3;
+}
+.btn2 {
+	background-color:#32ADE6;
+}
+
+footer {
+	height:70px;
+}
+
+/*
+https://codingapple.com/unit/html-18-webfont/
+*/

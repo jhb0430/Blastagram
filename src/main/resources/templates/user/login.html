@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원가입</title>
+<title>로그인</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,15 +19,27 @@
 		<!-- <div class="menu"></div>-->
 			<div class="main rounded-lg border border-secondary col-5 p-5">
 				<h1 class="pacifico-regular text-center m-5">Blastagram</h1>
-				<input type="text" class="form-control mt-3" placeholder="휴대폰 번호 또는 이메일 주소">
-				<input type="text" class="form-control mt-3" placeholder="비밀번호">
-				<input type="text" class="form-control mt-3" placeholder="성명">
-				<input type="text" class="form-control mt-3" placeholder="사용자 이름">
+				<input type="text" class="form-control mt-4" placeholder="전화번호, 사용자 이름 또는 이메일">
+				<input type="text" class="form-control mt-4" placeholder="비밀번호">
+				<label class="d-flex justify-content-end mt-4"><input type="checkbox" class="mr-2" checked>자동 로그인</label>
+				<div class="d-flex">
+					<button type="button" class="btn btn1 mt-5 w-100 mr-4">가입하기</button>
+					<button type="button" class="btn btn2 mt-5 w-100 text-white">로그인</button>
+				</div>
 					<div class="mt-5"></div>
-				<button type="button" class="btn btn2 mt-5 w-100 text-white">가입</button>
-					<div class="mt-5"></div>
+					<div class="mt-5 text-center">
+					<a href="#" class="text-secondary">비밀번호를 잊으셨나요?</a></div>
 			</div>
 		</section>
+		<div>
+			<select class="form-control col-2">
+				<option selected>Language</option>
+				<option>한국어</option>
+				<option>English</option>
+				<option>日本語</option>
+				<option>中文</option>
+			</select>
+		</div>
 		<footer class="d-flex align-items-center">
 			<div class="text-secondary">Copyright 2024. Memo All rights reserved </div>
 		</footer>
