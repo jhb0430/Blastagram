@@ -33,8 +33,11 @@
 		<section class="contents">
 		<div class="story">스토리</div>
 		<div class="d-flex justify-content-center">
-			<div class="post my-5">
-				<div class="userinfo d-flex justify-content-between mt-2 p-2 border-bottom">
+			<div class="post-image my-5 bg-success ml-3">
+			<img class="post-image" src="https://cdn.pixabay.com/photo/2022/12/20/12/10/santa-7667744_1280.jpg">
+			</div>
+			<div class="comment my-5 bg-warning">
+				<div class="d-flex justify-content-between mt-2 p-2 border-bottom">
 					<div class="d-flex ml-3">
 						<div><img width="50" src="/static/icon/storyavatar.png"></div>
 						<div class="ml-3 abeezee-regular"><!-- 포스트 한 사람 정보 -->
@@ -44,20 +47,21 @@
 					</div>
 					<div class="m-2"><a href="#"><img width="30" src="/static/icon/etc.png"></a></div>
 				</div>
-				<div> <!--  image -->
-					<img class="post-image" src="https://cdn.pixabay.com/photo/2022/12/20/12/10/santa-7667744_1280.jpg">
-				</div>
 				<div class="mx-3 my-2"> <!-- 내용, 코멘트란 -->
 					<div class="d-flex"> <!--  내용 -->
 						<div class="mr-2 abeezee-regular font-weight-bold">user_name</div>
 						<div class="noto-sans-kr"> 크리스마스라니~ 시간 빠르다 </div>
 					</div>
-					<div> <!--  댓글 -->
-						<div class="mt-4"><a href="#" class="text-secondary">View all 3 comments</a></div>
-					</div>
 					<div class="d-flex">
 						<div class="abeezee-regular">5 days ago</div>
 						<div class="ml-3 abeezee-regular-italic"><a href="#" class="text-secondary">See translation</a></div>
+					</div>
+					
+					<div class="d-flex align-items-center"> <!--  댓글 -->
+						<div class="mt-4"><img width="25" src="/static/icon/storyavatar.png">
+							<a href="#" class="text-dark abeezee-regular">user_name</a>
+						</div>
+						<div class="noto-sans-kr">블라블라 솰라솰라</div>
 					</div>
 				</div>
 			</div>

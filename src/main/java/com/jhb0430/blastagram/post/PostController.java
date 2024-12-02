@@ -9,9 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PostController {
 
 	@GetMapping("/timeline")
-	 public String signUp() {
+	 public String timelinePost() {
 		 return "post/timeline";
 	 }
+	
+	@GetMapping("/comment")
+	public String comment() {
+		return "post/comment";
+	}
 	
 	
 	

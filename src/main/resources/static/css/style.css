@@ -14,6 +14,8 @@ header {
 	height:800px;
 }
 
+
+/*FONT*/
 .pacifico-regular {
   font-family: "Pacifico", cursive;
   font-weight: 400;
@@ -69,6 +71,17 @@ header {
 	background-color:#FFF9F9;
 	object-fit: contain;
 }
+.comment {
+	width:450px;
+	height:450px;
+}
+
+
+.prof {
+	border-radius: 50%;
+}
+
+
 
 .btn1 {
 	background-color:#E3D3D3;
@@ -83,6 +96,10 @@ footer {
 
 /*
 https://codingapple.com/unit/html-18-webfont/
+
+//z-index 높은게 위로 올라감
+<div id="img1" style="display:none; position:absolute; top:0px; left:0px; z-index:2"> </div>
+<div id="img2" style="display:block; position:absolute; top: 0px; left :0px; z-index:1"> </div>
+
 */
-/* Home */
 
