@@ -13,7 +13,7 @@
 				</div>
 				<input type="password" class="form-control mt-3" placeholder="비밀번호" id="passwordInput">
 				<input type="text" class="form-control mt-3" placeholder="성명" id="nameInput">
-				<input type="text" class="form-control mt-3" placeholder="사용자 이름" id="userNameInput">
+				<input type="text" class="form-control mt-3" placeholder="사용자 이름" id="userIdInput">
 					<div class="mt-5"></div>
 				<button type="button" class="btn btn2 mt-5 w-100 text-white" id="joinBtn">가입</button>
 					<div class="mt-5"></div>
@@ -24,9 +24,34 @@
 		
 		$(document).ready(function(){
 			
-			$("#duplicateBtn").on("click",function(){
-				
 			// 중복확인 버튼
+			$("#duplicateBtn").on("click",function(){
+
+				let loginId = $("#idInput").val();
+			
+				// 유효성 검사
+				if(loginId == ""){
+					alert("휴대폰 번호 또는 이메일 주소를 입력해주세요");
+					return;
+				}
+				$.ajax({
+					type:"post"
+					, url:"/blastagram/duplicate-id"
+					, data:{"loginId":loginId}
+					, success:function(data) {
+						// 중복 : {"isDuplicate":true}
+						// 중복 아님 : {"isDuplicate":false}
+							if(data.isDuplicate) {
+								alert("중복된 아이디 입니다")
+							} else {
+								alert("사용 가능한 아이디입니다")
+							}
+						
+						}
+						, error:function() {
+							alert("중복확인 에러!");
+						}
+				});
 				
 			});
 				
@@ -36,7 +61,7 @@
 				let loginId = $("#idInput").val();
 				let password = $("#passwordInput").val();
 				let name = $("#nameInput").val();
-				let userName = $("#userNameInput").val();
+				let userId = $("#userIdInput").val();
 				
 				if(loginId == ""){
 					alert("휴대폰 번호 또는 이메일 주소를 입력해주세요");
@@ -53,14 +78,33 @@
 					return;
 					
 				}
-				if(userName == ""){
+				if(userId == ""){
 					alert("프로필에 표시될 이름을 입력해주세요");
 					return;
 					
 				}
 				
 				
+				$.ajax({
+						type:"post"
+						, url:"/blastagram/sign-up"
+						, data:{"loginId":loginId, "password":password, "name":name, "userId":userId}
+						, success:function(response){
+							if(response.result = "success"){
+							location.href="/blastagram/login-view"
+							} else {
+								alert("회원가입 실패");
+							}
+						}
+						, error:function(){
+							alert("회원가입 오류!!");		
+						}
+				});
+				
+				
 			});
+			
+			
 			
 			
 		});

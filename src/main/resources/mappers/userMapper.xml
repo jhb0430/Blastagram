@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.jhb0430.blastagram.user.repository.UserRepository">
+ 
+ 	<insert id="insertUser" parameterType="map">
+ 		INSERT INTO 
+ 				`user`
+			(
+				`loginId`
+				, `password`
+				, `name`
+				, `userId`
+			)
+			VALUE
+			(
+				#{loginId}
+				,#{password}
+				,#{name}
+				,#{userId}
+			)
+ 				
+ 	</insert>
+ 	
+ 	<select id="selectLoginUser" resultType="com.jhb0430.blastagram.user.domain.User">
+	 	SELECT 
+			`loginId`
+			, `password`
+		FROM 
+			`user`
+		WHERE 
+			`loginId` = #{loginId};
+			`password` = #{password};
+ 	</select>
+ 	
+ 	
+ 	<select id="selectCountId" parameterType="string" resultType="int">
+	 	SELECT 
+				count(*)
+			FROM 
+				`user`
+			WHERE 
+				`loginId` = #{loginId};
+ 	</select>
+ 	
+ 	
+ </mapper>
