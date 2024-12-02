@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class UserController {
 
 	
-	@GetMapping("/sign-up")
+	@GetMapping("/sign-up-view")
 	 public String signUp() {
 		 return "user/join";
 	 }
