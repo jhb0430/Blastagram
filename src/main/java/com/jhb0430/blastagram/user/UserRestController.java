@@ -3,6 +3,7 @@ package com.jhb0430.blastagram.user;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -68,15 +69,22 @@ public class UserRestController {
 	
 	
 	//중복확인 
-	@PostMapping("/duplicate-id")
+	@GetMapping("/duplicate-id")
 	public Map<String, Boolean> isDuplicateId(
 			@RequestParam("loginId") String loginId){
 		
-			boolean isDuplicate = userService.isDuplicateId(loginId);
+//			boolean isDuplicate = userService.isDuplicateId(loginId);
 		
 		// 중복 : {"isDuplicate":true}
 		// 중복 아님 : {"isDuplicate":false}
 		Map<String, Boolean> resultMap = new HashMap<>();
+		
+//		if(userService.isDuplicateId(loginId)) {
+//			resultMap.put("isDuplicate", true);
+//		} else {
+//			resultMap.put("isDuplicate", false);
+//			
+//		}
 		
 //		if(isDuplicate) {
 //			resultMap.put("isDuplicate", true);
@@ -84,7 +92,8 @@ public class UserRestController {
 //			resultMap.put("isDuplicate", false);
 //		}
 		
-		resultMap.put("isDuplicate", isDuplicate);
+//		resultMap.put("isDuplicate", isDuplicate);
+		resultMap.put("isDuplicate", userService.isDuplicateId(loginId));
 		
 		return resultMap;
 	}

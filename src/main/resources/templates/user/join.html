@@ -11,6 +11,8 @@
 					<input type="text" class="form-control col-9" placeholder="휴대폰 번호 또는 이메일 주소" id="idInput">
 					<button type="button" class="btn btn-sm btn1 text-white w-25 ml-1" id="duplicateBtn">중복확인</button>
 				</div>
+					<div class="small text-success d-none" id="availableText">사용가능한 아이디입니다</div>
+					<div class="small text-danger d-none" id="duplicateText">중복된 아이디입니다</div>
 				<input type="password" class="form-control mt-3" placeholder="비밀번호" id="passwordInput">
 				<input type="text" class="form-control mt-3" placeholder="성명" id="nameInput">
 				<input type="text" class="form-control mt-3" placeholder="사용자 이름" id="userIdInput">
@@ -35,17 +37,26 @@
 					return;
 				}
 				$.ajax({
-					type:"post"
+					type:"get"
 					, url:"/blastagram/duplicate-id"
 					, data:{"loginId":loginId}
-					, success:function(data) {
+					, success:function(response) {
+									// 그냥 이름값임..
+					// , success:function(data) {
 						// 중복 : {"isDuplicate":true}
 						// 중복 아님 : {"isDuplicate":false}
-							if(data.isDuplicate) {
-								alert("중복된 아이디 입니다")
+							if(response.isDuplicate) {
+								$("#duplicateText").removeClass("d-none");
+								$("#availableText").addClass("d-none");
 							} else {
-								alert("사용 가능한 아이디입니다")
+								$("#duplicateText").addClass("d-none");
+								$("#availableText").removeClass("d-none");
 							}
+						//	if(data.isDuplicate) {
+						//		alert("중복된 아이디 입니다")
+						//	} else {
+						//		alert("사용 가능한 아이디입니다")
+						//	}
 						
 						}
 						, error:function() {

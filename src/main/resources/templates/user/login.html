@@ -7,28 +7,68 @@
 		<section layout:fragment="contents" class="contents d-flex justify-content-center my-5 p-4">
 			<div class="main rounded-lg border border-secondary col-5 p-5">
 				<h1 class="pacifico-regular text-center m-5">Blastagram</h1>
-				<input type="text" class="form-control mt-4" placeholder="전화번호, 사용자 이름 또는 이메일">
-				<input type="text" class="form-control mt-4" placeholder="비밀번호">
-				<label class="d-flex justify-content-end mt-4"><input type="checkbox" class="mr-2" checked>자동 로그인</label>
+				<input type="text" class="form-control mt-4" placeholder="전화번호, 사용자 이름 또는 이메일" id="loginIdInput">
+				<input type="text" class="form-control mt-4" placeholder="비밀번호" id="password">
+				<label class="d-flex justify-content-end mt-4"><input type="checkbox" class="mr-2" checked id="autoLogin">자동 로그인</label>
 				<div class="d-flex">
-					<button type="button" class="btn btn1 mt-5 w-100 mr-4">가입하기</button>
-					<button type="button" class="btn btn2 mt-5 w-100 text-white">로그인</button>
+					<button type="button" class="btn btn1 mt-5 w-100 mr-4" id="signUpBtn">가입하기</button>
+					<button type="button" class="btn btn2 mt-5 w-100 text-white" id="loginBtn">로그인</button>
 				</div>
 					<div class="mt-5"></div>
 					<div class="mt-5 text-center">
 					<a href="#" class="text-secondary">비밀번호를 잊으셨나요?</a></div>
 			</div>
 		</section>
-		<div>
-			<select class="form-control col-2">
-				<option selected>Language</option>
-				<option>한국어</option>
-				<option>English</option>
-				<option>日本語</option>
-				<option>中文</option>
-			</select>
-		</div>
 		
-	<script layout:fragment="script"></script>	
+	<script layout:fragment="script">
+	 $(document).ready(function(){
+		 
+		 let loginId = $("#loginIdInput").val();
+		 let password = $("#passwordInput").val();
+		
+		 $("#signUpBtn").on("click",function(){
+			 
+			 location.href ="/blastagram/sign-up-view";
+			 
+		 });
+		 
+		 
+		 $("#loginBtn").on("click",function(){
+			 
+			 if(loginId == ""){
+				 alert("아이디를 입력하세요!")
+			 }
+			 if(password == ""){
+				 alert("비밀번호를 입력하세요!")
+				 
+			 }
+			 
+		 $.ajax({
+			 type:"post"
+			 ,url:"/blastagram/login"
+			 ,data:{"loginId":loginId, "password":password}
+		 	,success:function(response){
+		 		if(response.result ="success"){
+		 			location.href="/blatagram/main-view"
+		 		} else {
+		 			alert("로그인 실패")
+		 		}
+		 	}
+		 	,error:function(){
+		 		alert("로그인 오류!")
+		 	}
+			 
+			 
+			 });
+		 });
+		 
+		 
+		 
+		 
+		 
+	 });
+	
+	
+	</script>	
 		
 </html>

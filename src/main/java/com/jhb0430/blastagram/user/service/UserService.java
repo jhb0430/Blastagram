@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jhb0430.blastagram.common.MD5HashingEncoder;
+import com.jhb0430.blastagram.common.SHA256HashingEncoder;
 import com.jhb0430.blastagram.user.domain.User;
 import com.jhb0430.blastagram.user.repository.UserRepository;
 
@@ -27,7 +28,7 @@ public class UserService {
 			){
 		
 		//  패스워드 암호화과정
-		String encodingPassword = MD5HashingEncoder.encode(password);
+		String encodingPassword = SHA256HashingEncoder.encode(password);
 		
 		int count = userRepository.insertUser(loginId, encodingPassword, name, userId);
 		
@@ -57,6 +58,14 @@ public class UserService {
 		
 		int count = userRepository.selectCountId(loginId);
 		
+		/*
+		 *  if(count > 0){
+		 * 	 	return true;
+		 *  } else {
+		 *  	return false;
+		 *  }
+		 * 
+		 * */
 		return count >= 1;
 	}
 	
