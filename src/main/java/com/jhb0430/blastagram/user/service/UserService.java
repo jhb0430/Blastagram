@@ -30,6 +30,20 @@ public class UserService {
 			,String userId
 			){
 		
+		String email;
+		String phoneNumber;
+		
+		if (loginId.contains("@")) {
+			email = loginId;
+			phoneNumber = null;
+		} else {
+			phoneNumber = loginId;
+			email = null;
+		}
+		
+		
+		
+		
 		//  패스워드 암호화과정
 		String encodingPassword = SHA256HashingEncoder.encode(password);
 		
@@ -49,9 +63,33 @@ public class UserService {
 //			String email
 //			,String phoneNumber
 			String loginId
-			,String userId
+//			,String userId
 			,String password
 			) {
+		
+		
+		String email;
+		String phoneNumber; // matches() 메서드 활용.
+		String userId;
+		
+		boolean isNumeric = loginId.matches("\\d+");
+		
+		if (loginId.contains("@")) {
+			email = loginId;
+			phoneNumber = null;
+			userId = null;
+		} else if (isNumeric) {
+			phoneNumber = loginId;
+			email = null;;
+			userId = null;
+		} else {
+			phoneNumber = null;
+			email = null;;
+			userId = loginId;
+		}
+		
+		
+		
 		User user = userRepository.selectLoginUser(email, phoneNumber, userId, password);
 	
 		return user;
