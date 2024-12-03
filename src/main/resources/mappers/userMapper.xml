@@ -10,14 +10,16 @@
  		INSERT INTO 
  				`user`
 			(
-				`loginId`
+				`email`
+				,`phoneNumber`
 				, `password`
 				, `name`
 				, `userId`
 			)
 			VALUE
 			(
-				#{loginId}
+				#{email}
+				,#{phoneNumber}
 				,#{password}
 				,#{name}
 				,#{userId}
@@ -27,12 +29,21 @@
  	
  	<select id="selectLoginUser" resultType="com.jhb0430.blastagram.user.domain.User">
 	 	SELECT 
-			`loginId`
+			`email`
+			,`phoneNumber`
+			, `userId`
 			, `password`
 		FROM 
 			`user`
 		WHERE 
-			`loginId` = #{loginId};
+			(
+			`email` = #{email} 
+			OR 
+			`phoneNumber` = #{phoneNumber}
+			OR 
+			`userId` = #{userId}
+			)
+			AND 
 			`password` = #{password};
  	</select>
  	
@@ -43,7 +54,9 @@
 			FROM 
 				`user`
 			WHERE 
-				`loginId` = #{loginId};
+				`email` = #{email} 
+			OR 
+			`phoneNumber` = #{phoneNumber};
  	</select>
  	
  	

@@ -36,7 +36,7 @@
 					alert("휴대폰 번호 또는 이메일 주소를 입력해주세요");
 					return;
 				}
-				$.ajax({
+				$.ajax({ // 중복확인
 					type:"get"
 					, url:"/blastagram/duplicate-id"
 					, data:{"loginId":loginId}
@@ -96,7 +96,7 @@
 				}
 				
 				
-				$.ajax({
+				$.ajax({ // 회원가입 ajax
 						type:"post"
 						, url:"/blastagram/sign-up"
 						, data:{"loginId":loginId, "password":password, "name":name, "userId":userId}

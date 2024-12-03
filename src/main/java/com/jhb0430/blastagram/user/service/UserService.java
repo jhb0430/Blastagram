@@ -20,8 +20,11 @@ public class UserService {
 	}
 	
 	// 행 삽입
+	
 	public boolean addUser(
-			String loginId
+//			String email
+//			,String phoneNumber
+			String loginId 
 			,String password
 			,String name
 			,String userId
@@ -30,7 +33,7 @@ public class UserService {
 		//  패스워드 암호화과정
 		String encodingPassword = SHA256HashingEncoder.encode(password);
 		
-		int count = userRepository.insertUser(loginId, encodingPassword, name, userId);
+		int count =  userRepository.insertUser(email, phoneNumber, encodingPassword, name, userId);
 		
 		if(count == 1) {
 			return true;
@@ -43,10 +46,13 @@ public class UserService {
 	
 	// 로그인 (일치)
 	public User selectLoginUser(
+//			String email
+//			,String phoneNumber
 			String loginId
+			,String userId
 			,String password
 			) {
-		User user = userRepository.selectLoginUser(loginId, password);
+		User user = userRepository.selectLoginUser(email, phoneNumber, userId, password);
 	
 		return user;
 	}
@@ -54,9 +60,11 @@ public class UserService {
 			
 	// 중복확인
 			
-	public boolean isDuplicateId(String loginId) {
+	public boolean isDuplicateId(String email
+								,String phoneNumber
+								) {
 		
-		int count = userRepository.selectCountId(loginId);
+		int count = userRepository.selectCountId(email, phoneNumber);
 		
 		/*
 		 *  if(count > 0){
@@ -67,7 +75,7 @@ public class UserService {
 		 * 
 		 * */
 		return count >= 1;
-	}
+		}
 	
 	
 	

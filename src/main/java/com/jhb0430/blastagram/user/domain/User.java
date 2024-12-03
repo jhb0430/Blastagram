@@ -14,7 +14,7 @@ public class User {
 //	`updatedAt` timestamp DEFAULT CURRENT_TIMESTAMP	
 	
 	private int id;
-	private String loginId;
+//	private String loginId;
 	private String password;
 	private String email;
 	private String name;
@@ -29,12 +29,12 @@ public class User {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getLoginId() {
-		return loginId;
-	}
-	public void setLoginId(String loginId) {
-		this.loginId = loginId;
-	}
+//	public String getLoginId() {
+//		return loginId;
+//	}
+//	public void setLoginId(String loginId) {
+//		this.loginId = loginId;
+//	}
 	public String getPassword() {
 		return password;
 	}
