@@ -19,7 +19,7 @@ public class UserRestController {
 	private UserService userService;
 	
 //	@Autowired
-	public UserRestController(UserService userservice) {
+	public UserRestController(UserService userService) {
 		this.userService = userService;
 	}
 	

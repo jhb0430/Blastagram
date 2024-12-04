@@ -13,6 +13,7 @@
 				</div>
 					<div class="small text-success d-none" id="availableText">사용가능한 아이디입니다</div>
 					<div class="small text-danger d-none" id="duplicateText">중복된 아이디입니다</div>
+					<div class="small text-danger d-none" id="invailableText">'-'을 제외한 전화번호나 유효한 이메일을 입력해주세요</div>
 				<input type="password" class="form-control mt-3" placeholder="비밀번호" id="passwordInput">
 				<input type="text" class="form-control mt-3" placeholder="성명" id="nameInput">
 				<input type="text" class="form-control mt-3" placeholder="사용자 이름" id="userIdInput">
@@ -26,30 +27,14 @@
 		
 		$(document).ready(function(){
 			
-			
-	/*
-			let loginId = $("#idInput").val();
-			
-			let password = $("#passwordInput").val();
-			let name = $("#nameInput").val();
-			let userId = $("#userIdInput").val();
-			
-			let email;
-			let phoneNumber;
-			
-			if(loginId.includes("@")){
-		
-				email = loginId;
-				phoneNumber = null;
-				
-			} else {
-				email = null;
-				phoneNumber = loginId;
-			}
-/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i
-	*/
+	
+			var isDuplicateCheck = false; // 중복체크를 안했다가 default인 상태
+			var isDuplicateId = true; // 중복검사를 했는데 중복일 때 
 			
 			
+			const email_regex = /^[^\s@]+@[^\s@]+.[^\s@]+$/;
+			const phone_regex = /^[0-9]{10,11}$/;
+		    
 			
 			// 중복확인 버튼
 			$("#duplicateBtn").on("click",function(){
@@ -61,11 +46,25 @@
 			
 				
 				// 유효성 검사
-				//if(email == "" && phoneNumber ==""){
+				
 				if(loginId == ""){
 					alert("휴대폰 번호 또는 이메일 주소를 입력해주세요");
 					return;
 				}
+				
+				//양식에 맞지 않는것도 안된다고 해야함... 
+				// 이메일 양식에 맞지 않으면 
+				if(!(email_regex.test(loginId) || phone_regex.test(loginId))){
+					$("#invailableText").removeClass("d-none");
+					$("#availableText").addClass("d-none");
+					$("#duplicateText").addClass("d-none");
+				}  // 리턴시켜주기 
+					
+					
+				
+				// 버튼누르면 사용가능한 아이디인지 & 제대로 된 양식인지... 한번에 확인하려면... ? 
+						// 그리고 가입도 안되게... 
+				
 				$.ajax({ // 중복확인
 					type:"get"
 					, url:"/blastagram/duplicate-id"
@@ -73,16 +72,17 @@
 					//, data:{"email":email,"phoneNumber":phoneNumber}
 				
 					, success:function(response) {
-									// 그냥 이름값임..
-					// , success:function(data) {
-						// 중복 : {"isDuplicate":true}
-						// 중복 아님 : {"isDuplicate":false} 클래스 토글이란...?
-							if(response.isDuplicate) {
+					
+							isDuplicateCheck = true; // 중복확인을 했다 
+						
+							if(response.isDuplicate) { // 중복이면
 								$("#duplicateText").removeClass("d-none");
 								$("#availableText").addClass("d-none");
+								isDuplicateId = true;
 							} else {
 								$("#duplicateText").addClass("d-none");
 								$("#availableText").removeClass("d-none");
+								isDuplicateId = false;
 							}
 						//	if(data.isDuplicate) {
 						//		alert("중복된 아이디 입니다")
@@ -99,6 +99,7 @@
 			});
 				
 			
+	
 			$("#joinBtn").on("click", function(){
 				
 				let loginId = $("#idInput").val();
@@ -109,6 +110,15 @@
 				//if(email == "" && phoneNumber == ""){
 				if(loginId == ""){
 					alert("휴대폰 번호 또는 이메일 주소를 입력해주세요");
+					return;
+					
+				}
+				if(!isDuplicateCheck){
+					alert("중복체크를 해주세요");
+					return;
+					
+				if(!isDuplicateId){
+					alert("중복된 아이디로는 가입할 수 없습니다.");
 					return;
 					
 				}

@@ -8,7 +8,7 @@
 			<div class="main rounded-lg border border-secondary col-5 p-5">
 				<h1 class="pacifico-regular text-center m-5">Blastagram</h1>
 				<input type="text" class="form-control mt-4" placeholder="전화번호, 사용자 이름 또는 이메일" id="loginIdInput">
-				<input type="text" class="form-control mt-4" placeholder="비밀번호" id="password">
+				<input type="password" class="form-control mt-4" placeholder="비밀번호" id="passwordInput">
 				<label class="d-flex justify-content-end mt-4"><input type="checkbox" class="mr-2" checked id="autoLogin">자동 로그인</label>
 				<div class="d-flex">
 					<button type="button" class="btn btn1 mt-5 w-100 mr-4" id="signUpBtn">가입하기</button>
@@ -26,6 +26,7 @@
 		 let loginId = $("#loginIdInput").val();
 		 let password = $("#passwordInput").val();
 		
+		 
 		 $("#signUpBtn").on("click",function(){
 			 
 			 location.href ="/blastagram/sign-up-view";
@@ -33,13 +34,20 @@
 		 });
 		 
 		 
+		 
 		 $("#loginBtn").on("click",function(){
+			 
+			 let loginId = $("#loginIdInput").val();
+			 let password = $("#passwordInput").val();
+			 
 			 
 			 if(loginId == ""){
 				 alert("아이디를 입력하세요!")
+				 return;
 			 }
 			 if(password == ""){
 				 alert("비밀번호를 입력하세요!")
+				 return;
 				 
 			 }
 			 
