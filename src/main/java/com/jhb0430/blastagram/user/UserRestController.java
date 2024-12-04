@@ -27,9 +27,9 @@ public class UserRestController {
 	// 회원가입
 	@PostMapping("/sign-up")
 	public Map<String, String> signUp(
-//			@RequestParam("loginId") String loginId
-			 @RequestParam("email") String eamil
-			,@RequestParam("phoneNumber") String phoneNumber
+			@RequestParam("loginId") String loginId
+//			 @RequestParam("email") String eamil
+//			,@RequestParam("phoneNumber") String phoneNumber
 			,@RequestParam("password") String password
 			,@RequestParam("name") String name
 			,@RequestParam("userId") String userId
@@ -37,7 +37,7 @@ public class UserRestController {
 		
 		Map<String, String> resultMap = new HashMap<>();
 		
-		if(userService.addUser(eamil, phoneNumber, password, name, userId)) {
+		if(userService.addUser(loginId, password, name, userId)) {
 			resultMap.put("result", "success");
 		}else {
 			resultMap.put("result", "fail");
@@ -51,17 +51,17 @@ public class UserRestController {
 	// 입력한 아이디와 패스워드가 일치하면 로그인 성공하도록 
 	@PostMapping("/login")
 	public Map<String, String> login(
-//			@RequestParam("loginId") String loginId
-			 @RequestParam("email") String eamil
-			,@RequestParam("phoneNumber") String phoneNumber
-			,@RequestParam("userId") String userId
+			@RequestParam("loginId") String loginId
+//			 @RequestParam("email") String eamil
+//			,@RequestParam("phoneNumber") String phoneNumber
+//			,@RequestParam("userId") String userId
 			,@RequestParam("password") String password
 			){
 		
 		// result : success  
 		Map<String, String> resultMap = new HashMap<>();
 		
-		User user = userService.selectLoginUser(eamil, phoneNumber, userId, password);
+		User user = userService.selectLoginUser(loginId, password);
 		
 		if(user != null) {
 			resultMap.put("result", "success");
@@ -76,9 +76,9 @@ public class UserRestController {
 	//중복확인 
 	@GetMapping("/duplicate-id")
 	public Map<String, Boolean> isDuplicateId(
-//			@RequestParam("loginId") String loginId
-			 @RequestParam("email") String eamil
-			,@RequestParam("phoneNumber") String phoneNumber
+			@RequestParam("loginId") String loginId
+//			 @RequestParam("email") String eamil
+//			,@RequestParam("phoneNumber") String phoneNumber
 			){
 		
 		//			boolean isDuplicate = userService.isDuplicateId(loginId);
@@ -101,7 +101,7 @@ public class UserRestController {
 		//		}
 		
 		//		resultMap.put("isDuplicate", isDuplicate);
-		resultMap.put("isDuplicate", userService.isDuplicateId(eamil, phoneNumber));
+		resultMap.put("isDuplicate", userService.isDuplicateId(loginId));
 		
 		return resultMap;
 	}

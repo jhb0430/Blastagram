@@ -26,12 +26,42 @@
 		
 		$(document).ready(function(){
 			
+			
+	/*
+			let loginId = $("#idInput").val();
+			
+			let password = $("#passwordInput").val();
+			let name = $("#nameInput").val();
+			let userId = $("#userIdInput").val();
+			
+			let email;
+			let phoneNumber;
+			
+			if(loginId.includes("@")){
+		
+				email = loginId;
+				phoneNumber = null;
+				
+			} else {
+				email = null;
+				phoneNumber = loginId;
+			}
+/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i
+	*/
+			
+			
+			
 			// 중복확인 버튼
 			$("#duplicateBtn").on("click",function(){
 
 				let loginId = $("#idInput").val();
+				let password = $("#passwordInput").val();
+				let name = $("#nameInput").val();
+				let userId = $("#userIdInput").val();
 			
+				
 				// 유효성 검사
+				//if(email == "" && phoneNumber ==""){
 				if(loginId == ""){
 					alert("휴대폰 번호 또는 이메일 주소를 입력해주세요");
 					return;
@@ -40,11 +70,13 @@
 					type:"get"
 					, url:"/blastagram/duplicate-id"
 					, data:{"loginId":loginId}
+					//, data:{"email":email,"phoneNumber":phoneNumber}
+				
 					, success:function(response) {
 									// 그냥 이름값임..
 					// , success:function(data) {
 						// 중복 : {"isDuplicate":true}
-						// 중복 아님 : {"isDuplicate":false}
+						// 중복 아님 : {"isDuplicate":false} 클래스 토글이란...?
 							if(response.isDuplicate) {
 								$("#duplicateText").removeClass("d-none");
 								$("#availableText").addClass("d-none");
@@ -74,6 +106,7 @@
 				let name = $("#nameInput").val();
 				let userId = $("#userIdInput").val();
 				
+				//if(email == "" && phoneNumber == ""){
 				if(loginId == ""){
 					alert("휴대폰 번호 또는 이메일 주소를 입력해주세요");
 					return;
@@ -100,6 +133,7 @@
 						type:"post"
 						, url:"/blastagram/sign-up"
 						, data:{"loginId":loginId, "password":password, "name":name, "userId":userId}
+						//, data:{"email":email,"phoneNumber":phoneNumber, "password":password, "name":name, "userId":userId}
 						, success:function(response){
 							if(response.result = "success"){
 							location.href="/blastagram/login-view"

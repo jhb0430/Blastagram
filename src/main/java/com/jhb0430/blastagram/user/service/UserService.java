@@ -98,9 +98,21 @@ public class UserService {
 			
 	// 중복확인
 			
-	public boolean isDuplicateId(String email
-								,String phoneNumber
+	public boolean isDuplicateId( String loginId
+//								String email
+//								,String phoneNumber
 								) {
+		
+		String email;
+		String phoneNumber;
+		
+		if (loginId.contains("@")) {
+			email = loginId;
+			phoneNumber = null;
+		} else {
+			phoneNumber = loginId;
+			email = null;
+		}
 		
 		int count = userRepository.selectCountId(email, phoneNumber);
 		
@@ -112,7 +124,13 @@ public class UserService {
 		 *  }
 		 * 
 		 * */
-		return count >= 1;
+//		return count >= 1;
+			if(count > 0){
+				return true;
+			 } else {
+				return false;
+			 }
+		
 		}
 	
 	
