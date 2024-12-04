@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.jhb0430.blastagram.user.domain.User;
 import com.jhb0430.blastagram.user.service.UserService;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
 @RequestMapping("/blastagram")
 @RestController
 public class UserRestController {
@@ -56,6 +59,7 @@ public class UserRestController {
 //			,@RequestParam("phoneNumber") String phoneNumber
 //			,@RequestParam("userId") String userId
 			,@RequestParam("password") String password
+			, HttpServletRequest request 
 			){
 		
 		// result : success  
@@ -64,6 +68,16 @@ public class UserRestController {
 		User user = userService.selectLoginUser(loginId, password);
 		
 		if(user != null) {
+			
+			HttpSession session = request.getSession();
+			
+			// user id, user name
+			session.setAttribute("userId", user.getId());
+			session.setAttribute("userName", user.getName());
+//			session.setAttribute("password", user.getPassword());
+			
+			
+			
 			resultMap.put("result", "success");
 		}else {
 			resultMap.put("result", "fail");

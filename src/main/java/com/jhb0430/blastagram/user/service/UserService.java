@@ -68,6 +68,8 @@ public class UserService {
 			) {
 		
 		
+		
+		
 		String email;
 		String phoneNumber; // matches() 메서드 활용.
 		String userId;
@@ -89,8 +91,10 @@ public class UserService {
 		}
 		
 		
+		String encodingPassword = SHA256HashingEncoder.encode(password);
 		
-		User user = userRepository.selectLoginUser(email, phoneNumber, userId, password);
+		
+		User user = userRepository.selectLoginUser(email, phoneNumber, userId, encodingPassword);
 	
 		return user;
 	}

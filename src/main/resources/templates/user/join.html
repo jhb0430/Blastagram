@@ -31,8 +31,8 @@
 			var isDuplicateCheck = false; // 중복체크를 안했다가 default인 상태
 			var isDuplicateId = true; // 중복검사를 했는데 중복일 때 
 			
-			
-			const email_regex = /^[^\s@]+@[^\s@]+.[^\s@]+$/;
+			var isCorrectId = true;
+			const email_regex = /^[^\s@]+@[^\s@]+.[^\s@]+$/; // 맞으면 true로 받음 
 			const phone_regex = /^[0-9]{10,11}$/;
 		    
 			
@@ -58,6 +58,8 @@
 					$("#invailableText").removeClass("d-none");
 					$("#availableText").addClass("d-none");
 					$("#duplicateText").addClass("d-none");
+					
+					return isCorrectId = false;
 				}  // 리턴시켜주기 
 					
 					
@@ -116,6 +118,7 @@
 				if(!isDuplicateCheck){
 					alert("중복체크를 해주세요");
 					return;
+				}	
 					
 				if(!isDuplicateId){
 					alert("중복된 아이디로는 가입할 수 없습니다.");
@@ -135,7 +138,6 @@
 				if(userId == ""){
 					alert("프로필에 표시될 이름을 입력해주세요");
 					return;
-					
 				}
 				
 				
@@ -155,7 +157,6 @@
 							alert("회원가입 오류!!");		
 						}
 				});
-				
 				
 			});
 			
