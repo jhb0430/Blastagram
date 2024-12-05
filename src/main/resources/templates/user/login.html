@@ -32,7 +32,7 @@
 		 });
 		 
 		 
-		 $("#loginForm").on("submit",function(){
+		 $("#loginForm").on("submit",function(e){
 			 
 			 //return false; form태그의 기능이 false됨
 			 
@@ -40,12 +40,7 @@
 			 e.preventDefault();
 			 
 			 
-			 
 		 //});
-		 
-		
-		 
-		
 		 
 		 
 		// $("#loginBtn").on("click",function(){
@@ -69,7 +64,7 @@
 			 ,url:"/blastagram/login"
 			 ,data:{"loginId":loginId, "password":password}
 		 	,success:function(response){
-		 		if(response.result ="success"){
+		 		if(response.result =="success"){
 		 			location.href="/blatagram/main-view"
 		 		} else {
 		 			alert("로그인 실패")
