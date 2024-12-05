@@ -19,6 +19,7 @@ public class User {
 	private String email;
 	private String name;
 	private String phoneNumber;
+	private String userId;
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
 	
@@ -58,6 +59,12 @@ public class User {
 	}
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
+	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 	public LocalDateTime getCreatedAt() {
 		return createdAt;

@@ -59,7 +59,8 @@ public class UserRestController {
 //			,@RequestParam("phoneNumber") String phoneNumber
 //			,@RequestParam("userId") String userId
 			,@RequestParam("password") String password
-			, HttpServletRequest request 
+//			, HttpServletRequest request 
+			, HttpSession session 
 			){
 		
 		// result : success  
@@ -69,11 +70,11 @@ public class UserRestController {
 		
 		if(user != null) {
 			
-			HttpSession session = request.getSession();
+//			HttpSession session = request.getSession();
 			
 			// user id, user name
 			session.setAttribute("userId", user.getId());
-			session.setAttribute("userName", user.getName());
+			session.setAttribute("userName", user.getUserId());
 //			session.setAttribute("password", user.getPassword());
 			
 			
