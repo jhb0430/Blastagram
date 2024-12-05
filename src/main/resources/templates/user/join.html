@@ -13,7 +13,7 @@
 				</div>
 					<div class="small text-success d-none" id="availableText">사용가능한 아이디입니다</div>
 					<div class="small text-danger d-none" id="duplicateText">중복된 아이디입니다</div>
-					<div class="small text-danger d-none" id="invailableText">'-'을 제외한 전화번호나 유효한 이메일을 입력해주세요</div>
+					<div class="small text-danger d-none" id="invailableText">'-'을 제외한 전화번호 또는 유효한 이메일을 입력해주세요</div>
 				<input type="password" class="form-control mt-3" placeholder="비밀번호" id="passwordInput">
 				<input type="text" class="form-control mt-3" placeholder="성명" id="nameInput">
 				<input type="text" class="form-control mt-3" placeholder="사용자 이름" id="userIdInput">
@@ -30,6 +30,17 @@
 	
 			var isDuplicateCheck = false; // 중복체크를 안했다가 default인 상태
 			var isDuplicateId = true; // 중복검사를 했는데 중복일 때 
+			
+			$("#idInput").on("input",function(){ // input 창에 입력을 하면 
+				
+				isDuplicateCheck = false;
+				isDuplicateId = true;
+				$("#invailableText").addClass("d-none");
+				$("#availableText").addClass("d-none");
+				$("#duplicateText").addClass("d-none");
+				
+			});
+			
 			
 			var isCorrectId = true;
 			const email_regex = /^[^\s@]+@[^\s@]+.[^\s@]+$/; // 맞으면 true로 받음 
