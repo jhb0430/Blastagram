@@ -27,56 +27,67 @@
 		
 		$(document).ready(function(){
 			
+//		상태변수
 	
-			var isDuplicateCheck = false; // 중복체크를 안했다가 default인 상태
+			var isDuplicateCheck = false; // 중복체크를 안했다가 default인 상태. 중복확인 여부를 판단
 			var isDuplicateId = true; // 중복검사를 했는데 중복일 때 
+			var isCorrectId = true;
 			
-			$("#idInput").on("input",function(){ // input 창에 입력을 하면 
+			const email_regex = /^[^\s@]+@[^\s@]+.[^\s@]+$/; // 맞으면 true로 받음 
+			const phone_regex = /^[0-9]{10,11}$/;
+			
+			
+			 // 이메일 ,휴대폰 유효성 검사
+		    function validateId(loginId) {
+		        if (email_regex.test(loginId) || phone_regex.test(loginId)) { // 이메일이나 전화번호 형식이면
+		            return true; // 트루
+		        }
+		        return false;	// 둘 다 만족 안하면 false
+		    }
+			
+//			input 창에 입력을 하면 초기화
+			$("#idInput").on("input",function(){ 
 				
 				isDuplicateCheck = false;
 				isDuplicateId = true;
-				$("#invailableText").addClass("d-none");
-				$("#availableText").addClass("d-none");
-				$("#duplicateText").addClass("d-none");
+				isCorrectId = false; // 유효성 초기화
 				
+				$("#invailableText, #availableText, #duplicateText").addClass("d-none"); // 메세지창도 d-none
 			});
 			
 			
-			var isCorrectId = true;
-			const email_regex = /^[^\s@]+@[^\s@]+.[^\s@]+$/; // 맞으면 true로 받음 
-			const phone_regex = /^[0-9]{10,11}$/;
-		    
 			
-			// 중복확인 버튼
+			
+//			 중복확인 버튼
 			$("#duplicateBtn").on("click",function(){
 
 				let loginId = $("#idInput").val();
+				/* 로그인 아이디 이외에는 안쓰이고 있음...
 				let password = $("#passwordInput").val();
 				let name = $("#nameInput").val();
 				let userId = $("#userIdInput").val();
+				*/
 			
 				
 				// 유효성 검사
-				
 				if(loginId == ""){
 					alert("휴대폰 번호 또는 이메일 주소를 입력해주세요");
 					return;
 				}
 				
-				//양식에 맞지 않는것도 안된다고 해야함... 
-				// 이메일 양식에 맞지 않으면 
-				if(!(email_regex.test(loginId) || phone_regex.test(loginId))){
-					$("#invailableText").removeClass("d-none");
-					$("#availableText").addClass("d-none");
-					$("#duplicateText").addClass("d-none");
-					
-					return isCorrectId = false;
-				}  // 리턴시켜주기 
-					
-					
+				// 이메일/ 전화번호에 맞지 않으면 
+		        if (!validateId(loginId)) {
+		            $("#invailableText").removeClass("d-none");
+		            $("#availableText, #duplicateText").addClass("d-none");
+		            isCorrectId = false; // 유효하지 않은 입력
+		            return;
+		        } 
 				
-				// 버튼누르면 사용가능한 아이디인지 & 제대로 된 양식인지... 한번에 확인하려면... ? 
-						// 그리고 가입도 안되게... 
+				// 눌렀을때  if에 안걸리면 isCorrectId= true;
+		        isCorrectId = true;
+
+
+	
 				
 				$.ajax({ // 중복확인
 					type:"get"
@@ -90,19 +101,13 @@
 						
 							if(response.isDuplicate) { // 중복이면
 								$("#duplicateText").removeClass("d-none");
-								$("#availableText").addClass("d-none");
+								$("#availableText, #invailableText").addClass("d-none");
 								isDuplicateId = true;
-							} else {
-								$("#duplicateText").addClass("d-none");
+							} else {	// 중복이 아니면 
+								$("#duplicateText ,#invailableText").addClass("d-none");
 								$("#availableText").removeClass("d-none");
 								isDuplicateId = false;
 							}
-						//	if(data.isDuplicate) {
-						//		alert("중복된 아이디 입니다")
-						//	} else {
-						//		alert("사용 가능한 아이디입니다")
-						//	}
-						
 						}
 						, error:function() {
 							alert("중복확인 에러!");
@@ -112,7 +117,7 @@
 			});
 				
 			
-	
+//			회원 가입 버튼	
 			$("#joinBtn").on("click", function(){
 				
 				let loginId = $("#idInput").val();
@@ -120,18 +125,19 @@
 				let name = $("#nameInput").val();
 				let userId = $("#userIdInput").val();
 				
-				//if(email == "" && phoneNumber == ""){
+				// 얜 필요없나...?
 				if(loginId == ""){
 					alert("휴대폰 번호 또는 이메일 주소를 입력해주세요");
 					return;
-					
 				}
+				
+				
 				if(!isDuplicateCheck){
 					alert("중복체크를 해주세요");
 					return;
 				}	
 					
-				if(!isDuplicateId){
+				if(isDuplicateId){
 					alert("중복된 아이디로는 가입할 수 없습니다.");
 					return;
 					
@@ -156,7 +162,6 @@
 						type:"post"
 						, url:"/blastagram/sign-up"
 						, data:{"loginId":loginId, "password":password, "name":name, "userId":userId}
-						//, data:{"email":email,"phoneNumber":phoneNumber, "password":password, "name":name, "userId":userId}
 						, success:function(response){
 							if(response.result = "success"){
 							location.href="/blastagram/login-view"
