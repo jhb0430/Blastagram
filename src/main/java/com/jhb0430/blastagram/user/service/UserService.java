@@ -14,7 +14,7 @@ public class UserService {
 	
 	private UserRepository userRepository;
 	
-	@Autowired
+//	@Autowired
 	public UserService(UserRepository userRepository) {
 		this.userRepository = userRepository;
 	}
@@ -70,23 +70,17 @@ public class UserService {
 		
 		
 		
-		String email;
-		String phoneNumber; // matches() 메서드 활용.
-		String userId;
+		String email = null;
+		String phoneNumber = null; // matches() 메서드 활용.
+		String userId = null;
 		
 		boolean isNumeric = loginId.matches("\\d+");
 		
 		if (loginId.contains("@")) {
 			email = loginId;
-			phoneNumber = null;
-			userId = null;
 		} else if (isNumeric) {
 			phoneNumber = loginId;
-			email = null;;
-			userId = null;
 		} else {
-			phoneNumber = null;
-			email = null;;
 			userId = loginId;
 		}
 		
