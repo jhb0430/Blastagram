@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>Blastagram</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&family=Noto+Sans+KR:wght@100..900&family=Pacifico&display=swap" rel="stylesheet">
@@ -13,74 +14,157 @@
 
 	<div id="wrap">
 	<div class="d-flex"><!-- 메뉴랑 메인을 가로배치해주는 div -->
-		<div class="menu border border-light-subtle col-3">
-			<div class="d-flex align-items-center my-5">
-				<h3 class="pacifico-regular">Blastagram</h3>
+		<div class="menu border-right border-light-subtle">
+		<div class="ml-3">
+			<div class="d-flex align-items-center my-5 ml-3">
+				<a href="/blastagram/main-view" class="text-dark" style="text-decoration:none"><h3 class="pacifico-regular">Blastagram</h3></a>
 			</div>
 			<div>
 				<ul class="nav flex-column noto-sans-kr">
-				  <li><a class="nav-link active text-dark mb-2" aria-current="true" href="#"><img width="30" src="/static/icon/home.png">홈</a></li>
-				  <li><a class="nav-link text-dark mb-2" href="#"><img width="30" src="/static/icon/search.png">검색</a></li>
-				  <li><a class="nav-link text-dark mb-2" href="#"><img width="30" src="/static/icon/reels.png">릴스</a></li>
-				  <li><a class="nav-link text-dark mb-2" href="#"><img width="30" src="/static/icon/message.png">메시지</a></li>
-				  <li><a class="nav-link text-dark mb-2" href="#"><img width="30" src="/static/icon/liked.png">알림</a></li>
-				  <li><a class="nav-link text-dark mb-2" href="#"><img width="30" src="/static/icon/add.png">만들기</a></li>
-				  <li><a class="nav-link text-dark mb-2" href="#"><img width="30" src="/static/icon/storyavatar.png">프로필</a></li>
-				  <li><a class="nav-link text-dark mt-5" href="#">더보기</a></li>
+				  <li><a class="nav-link active text-dark mb-2" aria-current="true" href="#"><img width="30" src="/static/icon/home.png" class="mr-2">홈</a></li>
+				  <li><a class="nav-link text-dark mb-2" href="#"><img width="30" src="/static/icon/search.png" class="mr-2">검색</a></li>
+				  <li><a class="nav-link text-dark mb-2" href="#"><img width="30" src="/static/icon/reels.png" class="mr-2">릴스</a></li>
+				  <li><a class="nav-link text-dark mb-2" href="#"><img width="30" src="/static/icon/message.png" class="mr-2">메시지</a></li>
+				  <li><a class="nav-link text-dark mb-2" href="#"><img width="30" src="/static/icon/liked.png" class="mr-2">알림</a></li>
+				  <li><a class="nav-link text-dark mb-2" href="#"><img width="30" src="/static/icon/add.png" class="mr-2">만들기</a></li>
+				  <li><a class="nav-link text-dark mb-2" href="#"><img width="30" src="/static/icon/storyavatar.png" class="mr-2">프로필</a></li>
+				  <li><a class="nav-link text-dark mt-5" href="#" >더보기</a></li>
 				</ul>
 			</div>
 		</div>
-		<section class="contents">
-		<div class="story">스토리</div>
-		<div class="d-flex justify-content-center">
-			<div class="post-image my-5 bg-success ml-3">
-			<img class="post-image" src="https://cdn.pixabay.com/photo/2022/12/20/12/10/santa-7667744_1280.jpg">
-			</div>
-			<div class="comment my-5 bg-warning">
-				<div class="d-flex justify-content-between mt-2 p-2 border-bottom">
-					<div class="d-flex ml-3">
-						<div><img width="50" src="/static/icon/storyavatar.png"></div>
-						<div class="ml-3 abeezee-regular"><!-- 포스트 한 사람 정보 -->
-							<div class="font-weight-bold">user_name</div>
-							<div>Seoul, Korea</div>
-						</div>
-					</div>
-					<div class="m-2"><a href="#"><img width="30" src="/static/icon/etc.png"></a></div>
+		</div>
+		
+		<section class="contents ml-3">
+				<div class="story">스토리</div>
+			<div class="d-flex justify-content-center">
+				<div class="post-image my-5 ml-3"> <!--  포스팅 이미지 정보  -->
+				<img class="post-image" src="https://cdn.pixabay.com/photo/2022/12/20/12/10/santa-7667744_1280.jpg">
 				</div>
-				<div class="mx-3 my-2"> <!-- 내용, 코멘트란 -->
-					<div class="d-flex"> <!--  내용 -->
-						<div class="mr-2 abeezee-regular font-weight-bold">user_name</div>
-						<div class="noto-sans-kr"> 크리스마스라니~ 시간 빠르다 </div>
-					</div>
-					<div class="d-flex">
-						<div class="abeezee-regular">5 days ago</div>
-						<div class="ml-3 abeezee-regular-italic"><a href="#" class="text-secondary">See translation</a></div>
+				
+				<div class="comment my-5"> <!--  오른쪽 코멘트란 -->
+					<div class="d-flex justify-content-between mt-2 p-2 border-bottom"> 
+						<div class="d-flex ml-3"> <!-- 포스트 한 사람 정보 -->
+							<img height="34" src="/static/icon/storyavatar.png">
+							<div class="ml-3 abeezee-regular">
+								<a href="#" class="font-weight-bold text-dark abeezee-regular mr-3">user_name</a>
+								<div class="small">Seoul, Korea</div>
+							</div>
+						</div>
+						
+						<div class="m-2"><a href="#"><img width="30" src="/static/icon/etc.png"></a></div> <!--  더보기 -->
 					</div>
 					
-					<div class="d-flex align-items-center"> <!--  댓글 -->
-						<div><img width="25" src="/static/icon/storyavatar.png">
-							<a href="#" class="text-dark abeezee-regular">user_name</a>
-						</div>
-						<div class="noto-sans-kr ml-2">블라블라 솰라솰라</div>
+					<div class="mt-2 p-2 ml-3 posting">
+						<div class="d-flex">
+							<div>
+								<img height="34" src="/static/icon/storyavatar.png">
+							</div>
+							<div class="mb-3 mx-3">
+								<div class=" my-2 "> <!-- 내용란 -->
+									<a href="#" class="font-weight-bold text-dark abeezee-regular mr-3">user_name</a>
+									<span class="noto-sans-kr small">
+									크리스마스라니~ 시간 빠르다
+									크리스마스라니~ 시간 빠르다
+									크리스마스라니~ 시간 빠르다
+									크리스마스라니~ 시간 빠르다
+									</span>
+								</div>
+									<div class="d-flex small text-left">
+										<span class="abeezee-regular-italic"><a href="#" class="text-secondary">See translation</a></span>
+									</div>
+							</div>
+						</div>	
+							
+							
+							<div class="d-flex justify-content-between p-1 mb-2"> <!--  댓글 시작부분 -->
+								<span class="d-flex small">
+									<span>
+										<img width="25" src="/static/icon/storyavatar.png">
+									</span>
+									<div class="ml-3">
+										<a href="#" class="text-dark abeezee-regular font-weight-bold">user_comment1</a>
+											<span class="noto-sans-kr ml-3 small">블라블라 솰라솰라 블라블라 솰라솰라 블라블라 솰라솰라 블라블라 솰라솰라 블라블라 솰라솰라 블라블라 솰라솰라</span>
+										<div class="small text-secondary text-left">
+											<span class="small mr-2 noto-sans-kr"> 30분</span>
+											<span class="small mr-2 noto-sans-kr"> 좋아요 1개</span>
+											<a href="#" class="small text-secondary noto-sans-kr mr-2">답글달기</a>
+											<a href="#" class="small text-secondary abeezee-regular-italic"> See translation</a>
+										</div>
+									</div>
+								</span>
+								<span class="mt-2">
+									<a href="#" class="bi bi-heart small mx-2 text-dark"></a>
+								</span>
+							</div> <!--  댓글 끝나는 부분 -->
+							
+							<div class="d-flex justify-content-between p-1 mb-2"> <!--  댓글 -->
+								<span class="d-flex small">
+									<span>
+										<img width="25" src="/static/icon/storyavatar.png">
+									</span>
+									<div class="ml-3">
+										<a href="#" class="text-dark abeezee-regular font-weight-bold">user_comment2</a>
+											<span class="noto-sans-kr ml-3 small">어쩌구저쩌구 랄라라라러 웅앵웅앵 솰라솰라 대충 감동적인말 웃긴말 어쩌구저쩌구 랄라라라러 웅앵웅앵 솰라솰라 대충 감동적인말 웃긴말</span>
+										<div class="small text-secondary text-left">
+											<span class="small mr-2 noto-sans-kr"> 30분</span>
+											<span class="small mr-2 noto-sans-kr"> 좋아요 1개</span>
+											<a href="#" class="small text-secondary noto-sans-kr mr-2">답글달기</a>
+											<a href="#" class="small text-secondary abeezee-regular-italic"> See translation</a>
+										</div>
+									</div>
+								</span>
+								<span class="mt-2">
+									<a href="#" class="bi bi-heart small mx-2 text-dark"></a>
+								</span>
+							</div>
+							
+							
+							
 					</div>
+						<div class="p-2 my-1 mx-3 border-top comment-ui">
+							<div class="d-flex justify-content-between">
+								<div class="d-flex align-items-center h4 font-weight-bold">
+									<i class="bi bi-heart mr-3"></i>
+									<i class="bi bi-chat mr-3"></i>
+									<i class="bi bi-send mr-3"></i>	
+								</div>
+								<div class="d-flex align-items-center h4 font-weight-bold">
+									<i class="bi bi-bookmark"></i>
+								</div>
+							</div>
+							<div class="font-weight-bold mt-3">좋아요 000개</div>
+							<div class="abeezee-regular small text-secondary mb-3">5 days ago</div>
+							<div class="border-top d-flex align-items-center justify-content-between">
+								<span class="my-1 p-1 d-flex">
+									<i class="bi bi-emoji-smile h4"></i>
+									<span class="ml-2"><input type="text" class="form-control border-0 noto-sans-kr" placeholder="댓글달기"></span>
+								</span>
+								<span class="text-primary">게시</span>
+							</div>
+						</div>
+					
+					
+					
+					
+					
+					
+					
+					
 				</div>
+				
 			</div>
-			
-		</div>
 		</section>
 	</div>
 		
-		<div>
-			<select class="form-control col-2">
-				<option selected>Language</option>
-				<option>한국어</option>
-				<option>English</option>
-				<option>日本語</option>
-				<option>中文</option>
-			</select>
-		</div>
 		<footer class="d-flex align-items-center p-3">
-			<div class="text-secondary">Copyright 2024. Memo All rights reserved </div>
+			<select class="form-control col-1 mr-3">
+						<option selected>Language</option>
+						<option>한국어</option>
+						<option>English</option>
+						<option>日本語</option>
+						<option>中文</option>
+			</select>
+			<div class="text-secondary">Copyright 2024. Blastagram All rights reserved </div>
 		</footer>
 	</div>
 

@@ -1,8 +1,10 @@
 @charset "UTF-8";
 
 #wrap{
+	/*
 	width:1200px;
 	height:900px;
+	*/
 	margin: 0 auto;
 }
 
@@ -11,7 +13,8 @@ header {
 	background-color:#EBEDF0;
 }
 .menu {
-	height:800px;
+	width:300px;
+	height:900px;
 }
 
 
@@ -62,20 +65,29 @@ header {
 }
 .post {
 	width:450px;
+	/*
 	height:650px;
+	*/
 }
 
 .post-image {
 	width:450px;
-	height:450px;
+	height:800px;
 	background-color:#FFF9F9;
 	object-fit: contain;
 }
 .comment {
 	width:450px;
-	height:450px;
+	height:800px;
 }
 
+.comment > .posting {
+	height:500px;
+}
+
+.comment > .comment-ui{
+	height:200px;
+}
 
 .prof {
 	border-radius: 50%;
