@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko" 
+    xmlns:th="http://www.thymeleaf.org" 
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+     layout:decorate="~{layout/default02}">
+     
+		
+		<section layout:fragment="contents" class="contents ml-3">
+			<div class="story">스토리</div>
+			
+			
+			<div class="main">
+				<div>
+					<div class="d-flex p-2"> <!-- 포스트 한 사람 정보 -->
+						<img height="34" src="/static/icon/storyavatar.png">
+						<span class="font-weight-bold text-dark abeezee-regular ml-2">user_name</span>
+					</div>
+					<textarea class="form-control border-0" rows="10" id="contentsInput"></textarea>
+					<div class="d-flex">
+						 <input class="form-control border-0" type="file" id="fileInput">
+				 	<button type="button" class="btn btn2 col-2" id="PostBtn">입력</button>
+					 </div>
+				</div>
+			</div>
+			구린데 ... .
+			
+			
+			
+				
+		</section>
+		
+		<script layout:fragment="script">
+		
+		$(document).ready(function(){
+			
+			$("#PostBtn").on("click",function(){
+				
+				
+				let contents = $("#contentsInput").val();
+				let file = $("#fileInput")[0].files[0];
+				
+				//if(contents == ""){
+				//	alert("내용을 입력하세요")
+				//}
+				
+				if(file == null){
+					alert("파일을 선택하세요");
+					return;
+				}
+				
+				let formData = new FormData();
+				formData.append("contents",contents || null);
+				formData.append("imageFile",file);
+					
+					
+				$.ajax({
+						 type:"post"
+						, url:"/blastagram/post"
+						, data:formData
+						, enctype:"multiPart/form-data"
+						, processData:false
+						, contentType:false
+						, success:function(response){
+							// 성공시
+							if(response.result == "success"){
+							location.href = "/blastagram/main-view";
+							} else {
+								alert("게시 실패");
+							}
+						}	
+						, error:function(){
+							alert("게시 에러! 내용을 확인해주세요");
+						}	
+					});
+				
+				
+			});
+			
+			
+			
+			
+		});
+		
+		
+		
+		
+		</script>
+		
+		
+</html>

@@ -19,5 +19,11 @@ public class PostController {
 	}
 	
 	
+	@GetMapping("/post-view")
+	public String post() {
+		return "post/post";
+	}
+	
+	
 	
 }

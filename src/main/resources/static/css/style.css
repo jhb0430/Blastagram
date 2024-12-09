@@ -70,15 +70,16 @@ header {
 	*/
 }
 
+
 .post-image {
 	width:450px;
-	height:800px;
+	height:700px;
 	background-color:#FFF9F9;
 	object-fit: contain;
 }
 .comment {
 	width:450px;
-	height:800px;
+	height:700px;
 }
 
 .comment > .posting {
