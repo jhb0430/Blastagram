@@ -43,8 +43,8 @@
 					<div class="mx-3 my-2"> <!-- 내용, 코멘트란 -->
 						<div class="d-flex"> <!--  내용 -->
 							<div class="mr-2 abeezee-regular font-weight-bold" th:text="${card.userName}">user_name</div>
-							<div class="noto-sans-kr" th:if="${card.contents != null}" th:text="${card.contents}"> 크리스마스라니~ 시간 빠르다 </div>
-							<div class="noto-sans-kr" th:if="${card.contents == null}"> </div>
+							<div class="noto-sans-kr" th:if="${card.contents != 'null'}" th:text="${card.contents}"> 크리스마스라니~ 시간 빠르다 </div>
+							<div class="noto-sans-kr" th:if="${card.contents == 'null'}"> </div>
 						</div>
 						<div> <!--  댓글 -->
 							<div class="mt-4"><a href="/blastagram/comment-view" class="text-secondary">View all 3 comments</a></div>
