@@ -27,7 +27,7 @@ public class UserService {
 			String loginId 
 			,String password
 			,String name
-			,String userId
+			,String userName
 			){
 		
 		String email;
@@ -47,7 +47,7 @@ public class UserService {
 		//  패스워드 암호화과정
 		String encodingPassword = SHA256HashingEncoder.encode(password);
 		
-		int count =  userRepository.insertUser(email, phoneNumber, encodingPassword, name, userId);
+		int count =  userRepository.insertUser(email, phoneNumber, encodingPassword, name, userName);
 		
 		if(count == 1) {
 			return true;
@@ -72,7 +72,7 @@ public class UserService {
 		
 		String email = null;
 		String phoneNumber = null; // matches() 메서드 활용.
-		String userId = null;
+		String userName = null;
 		
 		boolean isNumeric = loginId.matches("\\d+");
 		
@@ -81,14 +81,14 @@ public class UserService {
 		} else if (isNumeric) {
 			phoneNumber = loginId;
 		} else {
-			userId = loginId;
+			userName = loginId;
 		}
 		
 		
 		String encodingPassword = SHA256HashingEncoder.encode(password);
 		
 		
-		User user = userRepository.selectLoginUser(email, phoneNumber, userId, encodingPassword);
+		User user = userRepository.selectLoginUser(email, phoneNumber, userName, encodingPassword);
 	
 		return user;
 	}
@@ -131,6 +131,10 @@ public class UserService {
 		
 		}
 	
+	
+	public User getUserById(int id) {
+		return userRepository.selectUserById(id);
+	}
 	
 	
 }

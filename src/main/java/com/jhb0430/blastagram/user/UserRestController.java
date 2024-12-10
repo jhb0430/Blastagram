@@ -35,12 +35,12 @@ public class UserRestController {
 //			,@RequestParam("phoneNumber") String phoneNumber
 			,@RequestParam("password") String password
 			,@RequestParam("name") String name
-			,@RequestParam("userId") String userId
+			,@RequestParam("userName") String userName
 			){
 		
 		Map<String, String> resultMap = new HashMap<>();
 		
-		if(userService.addUser(loginId, password, name, userId)) {
+		if(userService.addUser(loginId, password, name, userName)) {
 			resultMap.put("result", "success");
 		}else {
 			resultMap.put("result", "fail");
@@ -74,7 +74,7 @@ public class UserRestController {
 			
 			// user id, user name
 			session.setAttribute("userId", user.getId());
-			session.setAttribute("userName", user.getUserId());
+			session.setAttribute("userName", user.getUserName());
 //			session.setAttribute("password", user.getPassword());
 			
 			

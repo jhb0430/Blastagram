@@ -16,7 +16,7 @@
 					<div class="small text-danger d-none" id="invailableText">'-'을 제외한 전화번호 또는 유효한 이메일을 입력해주세요</div>
 				<input type="password" class="form-control mt-3" placeholder="비밀번호" id="passwordInput">
 				<input type="text" class="form-control mt-3" placeholder="성명" id="nameInput">
-				<input type="text" class="form-control mt-3" placeholder="사용자 이름" id="userIdInput">
+				<input type="text" class="form-control mt-3" placeholder="사용자 이름" id="userNameInput">
 					<div class="mt-5"></div>
 				<button type="button" class="btn btn2 mt-5 w-100 text-white" id="joinBtn">가입</button>
 					<div class="mt-5"></div>
@@ -65,7 +65,7 @@
 				/* 로그인 아이디 이외에는 안쓰이고 있음...
 				let password = $("#passwordInput").val();
 				let name = $("#nameInput").val();
-				let userId = $("#userIdInput").val();
+				let userName = $("#userNameInput").val();
 				*/
 			
 				
@@ -123,7 +123,7 @@
 				let loginId = $("#idInput").val();
 				let password = $("#passwordInput").val();
 				let name = $("#nameInput").val();
-				let userId = $("#userIdInput").val();
+				let userName = $("#userNameInput").val();
 				
 				// 얜 필요없나...?
 				if(loginId == ""){
@@ -152,7 +152,7 @@
 					return;
 					
 				}
-				if(userId == ""){
+				if(userName == ""){
 					alert("프로필에 표시될 이름을 입력해주세요");
 					return;
 				}
@@ -161,7 +161,7 @@
 				$.ajax({ // 회원가입 ajax
 						type:"post"
 						, url:"/blastagram/sign-up"
-						, data:{"loginId":loginId, "password":password, "name":name, "userId":userId}
+						, data:{"loginId":loginId, "password":password, "name":name, "userName":userName}
 						, success:function(response){
 							if(response.result = "success"){
 							location.href="/blastagram/login-view"

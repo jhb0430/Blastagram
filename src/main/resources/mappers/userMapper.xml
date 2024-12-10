@@ -14,7 +14,7 @@
 				,`phoneNumber`
 				, `password`
 				, `name`
-				, `userId`
+				, `userName`
 			)
 			VALUE
 			(
@@ -22,17 +22,22 @@
 				,#{phoneNumber}
 				,#{password}
 				,#{name}
-				,#{userId}
+				,#{userName}
 			)
  				
  	</insert>
  	
  	<select id="selectLoginUser" resultType="com.jhb0430.blastagram.user.domain.User">
 	 	SELECT 
-			`email`
+	 		`id`
+			,`email`
 			,`phoneNumber`
-			, `userId`
+			, `name`
+			, `userName`
 			, `password`
+			, `profileImage`
+			, `createdAt`
+			, `updatedAt`
 		FROM 
 			`user`
 		WHERE 
@@ -41,7 +46,7 @@
 			OR 
 			`phoneNumber` = #{phoneNumber}
 			OR 
-			`userId` = #{userId}
+			`userName` = #{userName}
 			)
 			AND 
 			`password` = #{password};
@@ -58,6 +63,29 @@
 			OR 
 			`phoneNumber` = #{phoneNumber};
  	</select>
+ 	
+ 	
+ 	<select id="selectUserById" parameterType="int" 
+ 	resultType="com.jhb0430.blastagram.user.domain.User">
+	
+	 	SELECT 
+			`id`
+			`email`
+			,`phoneNumber`
+			, `name`
+			, `userName`
+			, `password`
+			, `profileImage`
+			, `createdAt`
+			, `updatedAt`
+		FROM 
+			`user`
+		WHERE 
+			`id` = #{id} 
+ 	</select>
+ 	
+ 	
+ 	
  	
  	
  </mapper>

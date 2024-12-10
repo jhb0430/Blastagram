@@ -7,10 +7,10 @@
 		
 		<section layout:fragment="contents" class="contents ml-3">
 			<div class="story">스토리</div>
-			<div class="d-flex justify-content-center">
-				<div class="post my-5 ml-3">
+			<div class="d-flex justify-content-center" th:each="card:${cardList}">
+				<div class="post my-5 ml-3" >
 					<div class="userinfo d-flex justify-content-between mt-2 p-2 border-bottom">
-						<div class="d-flex ml-3">
+						<div class="d-flex align-items-center ml-3">
 							<div>
 							<!-- 
 								<img width="40" src="/static/icon/storyavatar.png">
@@ -18,14 +18,16 @@
 							 <i class="bi bi-person-circle h1"></i>
 							</div>
 							<div class="ml-3 abeezee-regular"><!-- 포스트 한 사람 정보 -->
-								<div class="font-weight-bold">user_name</div>
+								<div class="font-weight-bold" th:text="${card.userName}">user_name</div>
+								<!-- 
 								<div class="small">Seoul, Korea</div>
+								 -->
 							</div>
 						</div>
 						<div class="m-2"><a href="#"><img width="30" src="/static/icon/etc.png"></a></div>
 					</div>
 					<div> <!--  image -->
-						<img class="post-image" src="https://cdn.pixabay.com/photo/2022/12/20/12/10/santa-7667744_1280.jpg">
+						<img class="post-image" th:src="${card.imagePath}">
 					</div>
 					<div class="d-flex justify-content-between p-1 my-1">
 						<div class="d-flex align-items-center h4 font-weight-bold">
@@ -40,8 +42,9 @@
 					</div>
 					<div class="mx-3 my-2"> <!-- 내용, 코멘트란 -->
 						<div class="d-flex"> <!--  내용 -->
-							<div class="mr-2 abeezee-regular font-weight-bold">user_name</div>
-							<div class="noto-sans-kr"> 크리스마스라니~ 시간 빠르다 </div>
+							<div class="mr-2 abeezee-regular font-weight-bold" th:text="${card.userName}">user_name</div>
+							<div class="noto-sans-kr" th:if="${card.contents != null}" th:text="${card.contents}"> 크리스마스라니~ 시간 빠르다 </div>
+							<div class="noto-sans-kr" th:if="${card.contents == null}"> </div>
 						</div>
 						<div> <!--  댓글 -->
 							<div class="mt-4"><a href="/blastagram/comment-view" class="text-secondary">View all 3 comments</a></div>

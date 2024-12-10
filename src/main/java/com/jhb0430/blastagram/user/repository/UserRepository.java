@@ -14,14 +14,14 @@ public interface UserRepository {
 			,@Param("phoneNumber")String phoneNumber
 			,@Param("password")String password
 			,@Param("name")String name
-			,@Param("userId")String userId
+			,@Param("userName")String userName
 			);
 	
 	// domain 만들어줘야하지 않남 
 	public User selectLoginUser(
 			@Param("email")String email
 			,@Param("phoneNumber")String phoneNumber
-			,@Param("userId")String userId
+			,@Param("userName")String userName
 			,@Param("password")String password
 			);
 	
@@ -30,6 +30,11 @@ public interface UserRepository {
 			@Param("email")String email
 			,@Param("phoneNumber")String phoneNumber
 			);
+
+	
+	
+	public User selectUserById(@Param("id") int id);
 	
 	
 }
+
