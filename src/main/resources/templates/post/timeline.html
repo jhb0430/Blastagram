@@ -31,7 +31,7 @@
 					</div>
 					<div class="d-flex justify-content-between p-1 my-1">
 						<div class="d-flex align-items-center h4 font-weight-bold">
-							<a href="#" class="bi bi-heart mr-3 text-dark" style="text-decoration:none"></a>
+							<a href="#" class="bi bi-heart mr-3 text-dark like-btn" style="text-decoration:none" th:data-post-id="${card.postId}"></a>
 							<a href="#" class="bi bi-chat mr-3 text-dark" style="text-decoration:none"></a>
 							<a href="#" class="bi bi-send mr-3 text-dark" style="text-decoration:none"></a>
 						</div>
@@ -60,6 +60,41 @@
 		</section>
 		
 		<script layout:fragment="script">
+		
+		$(document).ready(function(){
+			
+			$(".like-btn").on("click", function(){
+				
+				// 이벤트가 발생한 태그 객체
+				let postId = $(this).data("post-id")
+				
+				
+				$.ajax({
+					 type:"post"
+					, url:"/post/like"
+					, data:{"postId":postId}
+					, success:function(response){
+						if(response =="success"){
+							$(".like-btn").removeclass("bi-heart");
+							$(".like-btn").addclass("bi-heart-fill");
+							location.reload();
+						} else {
+							alert("좋아요 실패")
+						}
+					}
+					, error:function(){
+							alert("좋아요 에러!!")
+						
+					}
+					
+				});
+				
+				
+			});
+			
+			
+		});
+		
 		</script>
 		
 		

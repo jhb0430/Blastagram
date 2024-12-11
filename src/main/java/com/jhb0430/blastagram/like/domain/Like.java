@@ -1,4 +1,4 @@
-package com.jhb0430.blastagram.comments.domain;
+package com.jhb0430.blastagram.like.domain;
 
 import java.time.LocalDateTime;
 
@@ -16,27 +16,25 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Builder
-@Table(name= "`comments`")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Table(name="`like`")
 @Entity
-public class Comments {
+public class Like {
 
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	
 	@Column(name="postId")
 	private int postId;
+	
 	@Column(name="userId")
 	private int userId;
-	private String comments;
+	
+	@CreationTimestamp
 	@Column(name="createdAt")
-	@CreationTimestamp
 	private LocalDateTime createdAt;
-	@Column(name="updatedAt")
-	@CreationTimestamp
-	private LocalDateTime updatedAt;
-	
-	
 }

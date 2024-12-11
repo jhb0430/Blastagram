@@ -3,14 +3,12 @@ package com.jhb0430.blastagram.post;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.jhb0430.blastagram.post.repository.PostRepository;
 import com.jhb0430.blastagram.post.service.PostService;
 
 import jakarta.servlet.http.HttpSession;
@@ -52,6 +50,7 @@ public class PostRestController {
 		
 		
 	}
+	
 	
 	
 	
