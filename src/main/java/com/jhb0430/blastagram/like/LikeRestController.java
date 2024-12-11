@@ -38,7 +38,7 @@ public class LikeRestController {
 		if(likeService.addLike(postId, userId)) {
 			resultMap.put("result", "success");
 		} else {
-			resultMap.put("result", "success");
+			resultMap.put("result", "fail");
 		}
 		return resultMap;
 		

@@ -8,17 +8,20 @@
 		<section layout:fragment="contents" class="contents ml-3">
 				<div class="story">스토리</div>
 			<div class="d-flex justify-content-center">
-				<div class="post-image my-5 ml-3"> <!--  포스팅 이미지 정보  -->
-				<img class="post-image" src="https://cdn.pixabay.com/photo/2022/12/20/12/10/santa-7667744_1280.jpg">
+			<th:block th:each="card:${cardList}">
+			<!-- 
+			 -->
+			
+				<div class="post-image my-5 ml-3"> <!--  포스팅 이미지 정보 th:src="${card.imagePath}" -->
+				<img class="post-image"  src="https://cdn.pixabay.com/photo/2022/12/20/12/10/santa-7667744_1280.jpg" >
 				</div>
 				
 				<div class="comment my-5"> <!--  오른쪽 코멘트란 -->
 					<div class="d-flex justify-content-between mt-2 p-2 border-bottom"> 
-						<div class="d-flex ml-3"> <!-- 포스트 한 사람 정보 -->
+						<div class="d-flex align-items-center ml-3"> <!-- 포스트 한 사람 정보 -->
 							<img height="34" src="/static/icon/storyavatar.png">
 							<div class="ml-3 abeezee-regular">
 								<a href="#" class="font-weight-bold text-dark abeezee-regular mr-3">user_name</a>
-								<div class="small">Seoul, Korea</div>
 							</div>
 						</div>
 						
@@ -44,7 +47,7 @@
 										<span class="abeezee-regular-italic"><a href="#" class="text-secondary">See translation</a></span>
 									</div>
 							</div>
-						</div>	
+						</div>
 							
 							
 							<div class="d-flex justify-content-between p-1 mb-2"> <!--  댓글 시작부분 -->
@@ -107,10 +110,10 @@
 							<div class="abeezee-regular small text-secondary mb-3">5 days ago</div>
 							<div class="border-top d-flex align-items-center justify-content-between">
 								<span class="my-1 p-1 d-flex">
-									<i class="bi bi-emoji-smile h4"></i>
-									<span class="ml-2"><input type="text" class="form-control border-0 noto-sans-kr" placeholder="댓글달기" id="commentInput"></span>
+									<i class="bi bi-emoji-smile h4"></i>																		<!-- th:id="|commentInput${card.postId}|" -->
+									<form class="ml-2"><input type="text" class="form-control border-0 noto-sans-kr" placeholder="댓글달기" id="commentInput"></form>
 								</span>
-								<buttno type="button" class="btn btn-0 text-primary" id="commentBtn">게시</span>
+								<button type="button" class="btn btn-0 text-primary" id="commentBtn" data-post-id="${card.postId}">게시</span>
 							</div>
 						</div>
 					
@@ -122,6 +125,7 @@
 					
 					
 				</div>
+				</th:block>			
 				
 			</div>
 		</section>
@@ -133,16 +137,33 @@
 			
 			$("#commentBtn").on("click",function(){
 				
-			let comment = $("#commentInput").val();
+			let comments = $("#commentInput").val();
+		//  let comments = $(this).perv().val();
+		//  let comments = $("#commentsInput" + postId).val();
+			
+			alert(comments);
 
-			if(comment == ""){
-				alert("코멘트를 입력해주세요")
-			}
+			
+			let postId = $(this).data("post-id");
+			
+			
+			
 			
 		
 			$.ajax({
-				type:"get"
-				,url:"/blastgram/commnet/create"
+				type:"post"
+				,url:"/comment/create"
+				,data:{"postId":postId,"comments":comments}
+				,success:function(response){
+					if(response.result == "success"){
+						location.reload();
+					} else {
+						alert("댓글 작성 실패")
+					}
+				}
+				,error:function(){
+					alert("작성 오류!! ");
+				}
 				
 			});
 			

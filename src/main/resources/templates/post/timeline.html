@@ -31,8 +31,8 @@
 					</div>
 					<div class="d-flex justify-content-between p-1 my-1">
 						<div class="d-flex align-items-center h4 font-weight-bold">
-							<a href="#" class="bi bi-heart mr-3 text-dark like-btn" style="text-decoration:none" th:data-post-id="${card.postId}"></a>
-							<a href="#" class="bi bi-chat mr-3 text-dark" style="text-decoration:none"></a>
+							<i class="bi bi-heart mr-3 text-dark like-btn" th:data-post-id="${card.postId}"></i>
+							<a th:href="|/blastagram/comment-view?${card.postId}|" class="bi bi-chat mr-3 text-dark" style="text-decoration:none"></a>
 							<a href="#" class="bi bi-send mr-3 text-dark" style="text-decoration:none"></a>
 						</div>
 						<div class="d-flex align-items-center h4 font-weight-bold">
@@ -47,7 +47,7 @@
 							<div class="noto-sans-kr" th:if="${card.contents == 'null'}"> </div>
 						</div>
 						<div> <!--  댓글 -->
-							<div class="mt-4"><a href="/blastagram/comment-view" class="text-secondary">View all 3 comments</a></div>
+							<div class="mt-4"><a th:href="|/blastagram/comment-view?${card.postId}|" class="text-secondary">View all 3 comments</a></div>
 						</div>
 						<div class="d-flex">
 							<div class="abeezee-regular">5 days ago</div>
@@ -74,7 +74,7 @@
 					, url:"/post/like"
 					, data:{"postId":postId}
 					, success:function(response){
-						if(response =="success"){
+						if(response.result =="success"){
 							$(".like-btn").removeclass("bi-heart");
 							$(".like-btn").addclass("bi-heart-fill");
 							location.reload();

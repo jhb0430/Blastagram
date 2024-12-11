@@ -43,7 +43,12 @@ public class PostController {
 	
 	
 	@GetMapping("/post-view")
-	public String post() {
+	public String post(Model model) {
+		
+		List<CardDTO> cardList = postService.getPostList();
+		
+		model.addAttribute("cardList",cardList);
+		
 		return "post/post";
 	}
 	
