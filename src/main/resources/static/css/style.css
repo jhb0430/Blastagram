@@ -2,6 +2,13 @@
 
 #wrap{
 	/*
+	코멘트 500* 870
+사진 700* 870
+코멘트 헤더 61
+좋아요 50
+댓글 40 폼태그임
+댓글 41
+전체 1600
 	width:1200px;
 	height:900px;
 	*/
@@ -59,7 +66,7 @@ header {
 }
 
 .contents > .story {
-	width:900px;
+	/*width:900px;*/
 	height:100px;
 	background-color:#FFF9F9;
 }
@@ -72,14 +79,14 @@ header {
 
 
 .post-image {
-	width:450px;
-	height:700px;
+	width:700px;
+	height:870px;
 	background-color:#FFF9F9;
 	object-fit: contain;
 }
 .comment {
-	width:450px;
-	height:700px;
+	width:500px;
+	height:870px;
 }
 
 .comment > .posting {
