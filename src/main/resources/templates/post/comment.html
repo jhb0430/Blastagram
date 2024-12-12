@@ -8,12 +8,12 @@
 		<section layout:fragment="contents" class="contents ml-3">
 				<div class="story">스토리</div>
 			<div class="d-flex justify-content-center">
-			<th:block th:each="card:${cardList}">
+			
 			<!-- 
 			 -->
 			
-				<div class="post-image my-5 ml-3"> <!--  포스팅 이미지 정보 th:src="${card.imagePath}" -->
-				<img class="post-image"  src="https://cdn.pixabay.com/photo/2022/12/20/12/10/santa-7667744_1280.jpg" >
+				<div class="post-image my-5 ml-3"> <!--  포스팅 이미지 정보 th:src="${post.imagePath}" src="https://cdn.pixabay.com/photo/2022/12/20/12/10/santa-7667744_1280.jpg"-->
+				<img class="post-image" th:src="${post.imagePath}"  >
 				</div>
 				
 				<div class="comment my-5"> <!--  오른쪽 코멘트란 -->
@@ -35,8 +35,9 @@
 							</div>
 							<div class="mb-3 mx-3">
 								<div class=" my-2 "> <!-- 내용란 -->
-									<a href="#" class="font-weight-bold text-dark abeezee-regular mr-3">user_name</a>
-									<span class="noto-sans-kr small">
+									<a href="#" class="font-weight-bold text-dark abeezee-regular mr-3" th:text="${post.userId}">user_name</a>
+									
+									<span class="noto-sans-kr small" th:text="${post.contents}">
 									크리스마스라니~ 시간 빠르다
 									크리스마스라니~ 시간 빠르다
 									크리스마스라니~ 시간 빠르다
@@ -111,9 +112,9 @@
 							<div class="border-top d-flex align-items-center justify-content-between">
 								<span class="my-1 p-1 d-flex">
 									<i class="bi bi-emoji-smile h4"></i>																		<!-- th:id="|commentInput${card.postId}|" -->
-									<form class="ml-2"><input type="text" class="form-control border-0 noto-sans-kr" placeholder="댓글달기" id="commentInput"></form>
+									<span class="ml-2"><input type="text" class="form-control border-0 noto-sans-kr" placeholder="댓글달기" id="commentInput"></span>
 								</span>
-								<button type="button" class="btn btn-0 text-primary" id="commentBtn" data-post-id="${card.postId}">게시</span>
+								<button type="button" class="btn btn-0 text-primary" id="commentBtn" data-post-id="${card.postId}">게시</button>
 							</div>
 						</div>
 					
@@ -125,7 +126,6 @@
 					
 					
 				</div>
-				</th:block>			
 				
 			</div>
 		</section>

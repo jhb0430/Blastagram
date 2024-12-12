@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class CardDTO {
+public class CommentDTO {
 
 	private int postId;
 	private int userId;

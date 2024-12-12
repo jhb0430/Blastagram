@@ -19,5 +19,6 @@ public class CardDTO {
 	// 화면에 표시될 사용자 정보. 로그인 아이디
 	private String userName;
 	
+	private int likeCount;
 	
 }

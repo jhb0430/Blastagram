@@ -36,10 +36,6 @@ public class PostController {
 
 	
 	
-	@GetMapping("/comment-view")
-	public String comment() {
-		return "post/comment";
-	}
 	
 	
 	@GetMapping("/post-view")

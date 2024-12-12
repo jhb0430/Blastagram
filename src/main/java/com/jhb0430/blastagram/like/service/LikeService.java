@@ -30,4 +30,11 @@ public class LikeService {
 			
 	}
 	
+	
+		// 좋아요 개수 count 기능
+	public int getLikeCount(int postId){
+			
+		return  likeRepository.countByPostId(postId);
+	}
+	
 }

@@ -2,11 +2,13 @@ package com.jhb0430.blastagram.post.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jhb0430.blastagram.common.FileManager;
+import com.jhb0430.blastagram.like.service.LikeService;
 import com.jhb0430.blastagram.post.domain.Post;
 import com.jhb0430.blastagram.post.dto.CardDTO;
 import com.jhb0430.blastagram.post.repository.PostRepository;
@@ -18,10 +20,14 @@ public class PostService {
 
 private PostRepository postRepository;
 private UserService userService;
+private LikeService likeService;
 	
-	public PostService(PostRepository postRepository,UserService userService) {
+	public PostService(PostRepository postRepository
+			,UserService userService
+			,LikeService likeService) {
 		this.postRepository = postRepository;
 		this.userService = userService;
+		this.likeService = likeService;
 	}
 	
 	
@@ -64,12 +70,15 @@ private UserService userService;
 			// userService를 통해 사용자 정보 join
 			User user = userService.getUserById(userId);
 			
+			int likeCount = likeService.getLikeCount(post.getId());
+			
 			CardDTO card = CardDTO.builder()
 									.postId(post.getId())
 									.userId(userId)
 									.contents(post.getContents())
 									.imagePath(post.getImagePath())
 									.userName(user.getUserName())
+									.likeCount(likeCount)
 									.build();
 							
 			cardList.add(card);
@@ -80,6 +89,15 @@ private UserService userService;
 		return cardList;
 	}
 	
+	// id를 입력하면  정보 찾아오는 ... 
+		 public Post getPostById(int id) {
+		        
+			 Optional<Post> optionalPost = postRepository.findById(id);
+			 
+//			 return postList;
+			 return optionalPost.orElse(null);
+		    }
+		
 	
 	
 	
