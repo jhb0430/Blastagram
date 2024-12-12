@@ -1,5 +1,7 @@
 package com.jhb0430.blastagram.comment.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.jhb0430.blastagram.comment.domain.Comment;
@@ -39,7 +41,16 @@ public class CommentService {
 		}
 	
 		// 
+		public List<Comment >getCommentList(int postId){
+			
+			return commentRepository.findByPostId(postId);
+		}
 		
+		// 댓글 갯수 
+		public int getCommentCount(int postId){
+			
+			return  commentRepository.countByPostId(postId);
+		}
 		
 
 }

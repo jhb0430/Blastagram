@@ -36,5 +36,22 @@ public class LikeService {
 			
 		return  likeRepository.countByPostId(postId);
 	}
+
+	
+	// 어떤 게시글에 누가 좋아요를 했냐 안했냐
+	
+	public boolean isLike(int postId, int userId) {
+		
+		int count = likeRepository.countByPostIdAndUserId(postId, userId);
+		
+		if(count > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	
 }
+
+

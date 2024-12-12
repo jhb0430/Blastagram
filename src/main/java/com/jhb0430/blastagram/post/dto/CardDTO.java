@@ -1,5 +1,9 @@
 package com.jhb0430.blastagram.post.dto;
 
+import java.util.List;
+
+import com.jhb0430.blastagram.comment.domain.Comment;
+
 import lombok.Builder;
 import lombok.Getter;
 
@@ -20,5 +24,8 @@ public class CardDTO {
 	private String userName;
 	
 	private int likeCount;
+	private boolean isLike;
+	private List<Comment> commentList;
 	
+	private int commentCount;
 }

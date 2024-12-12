@@ -7,6 +7,8 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.jhb0430.blastagram.comment.domain.Comment;
+import com.jhb0430.blastagram.comment.service.CommentService;
 import com.jhb0430.blastagram.common.FileManager;
 import com.jhb0430.blastagram.like.service.LikeService;
 import com.jhb0430.blastagram.post.domain.Post;
@@ -21,13 +23,17 @@ public class PostService {
 private PostRepository postRepository;
 private UserService userService;
 private LikeService likeService;
+private CommentService commentService;
 	
 	public PostService(PostRepository postRepository
 			,UserService userService
-			,LikeService likeService) {
+			,LikeService likeService
+			,CommentService commentService) {
+		
 		this.postRepository = postRepository;
 		this.userService = userService;
 		this.likeService = likeService;
+		this.commentService = commentService;
 	}
 	
 	
@@ -58,7 +64,7 @@ private LikeService likeService;
 		
 	}
 	
-	public List<CardDTO> getPostList(){
+	public List<CardDTO> getPostList(int loginUserId){
 		
 		// 조회된 게시글 마다 작성자의 로그인 아이디 얻어오기
 		List<Post> postList = postRepository.findAllByOrderByIdDesc();
@@ -70,7 +76,14 @@ private LikeService likeService;
 			// userService를 통해 사용자 정보 join
 			User user = userService.getUserById(userId);
 			
+			int commentCount = commentService.getCommentCount(post.getId());
+			
 			int likeCount = likeService.getLikeCount(post.getId());
+													// userId= 로그인한 사용자 정보.
+			
+			boolean isLike = likeService.isLike(post.getId(), loginUserId);		
+			
+			List<Comment> commentList = commentService.getCommentList(post.getId());
 			
 			CardDTO card = CardDTO.builder()
 									.postId(post.getId())
@@ -79,6 +92,9 @@ private LikeService likeService;
 									.imagePath(post.getImagePath())
 									.userName(user.getUserName())
 									.likeCount(likeCount)
+									.isLike(isLike)
+									.commentList(commentList)
+									.commentCount(commentCount)
 									.build();
 							
 			cardList.add(card);
@@ -93,7 +109,7 @@ private LikeService likeService;
 		 public Post getPostById(int id) {
 		        
 			 Optional<Post> optionalPost = postRepository.findById(id);
-			 
+			 // DTO...기능 만들어준다 
 //			 return postList;
 			 return optionalPost.orElse(null);
 		    }

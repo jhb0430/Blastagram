@@ -37,7 +37,7 @@ public class CommentController {
 	
 	
 	@GetMapping("/comment-view")
-	public String comment(@RequestParam("postId") int postId
+	public String comment(@RequestParam int postId
 			,Model model ) {
 		
 		Post post = postService.getPostById(postId);
@@ -47,7 +47,7 @@ public class CommentController {
 		// 닉네임 받아오기 , 좋아요 받아오기 -> post의 cardList에 있음
 		// 코멘트 목록 받아오기 
 		
-		List<CardDTO> cardList = postService.getPostList();	
+		List<CardDTO> cardList = postService.getPostList(postId);	
 		
 		model.addAttribute("cardList",cardList);
 		

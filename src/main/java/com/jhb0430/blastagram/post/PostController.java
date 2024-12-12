@@ -11,6 +11,8 @@ import com.jhb0430.blastagram.post.domain.Post;
 import com.jhb0430.blastagram.post.dto.CardDTO;
 import com.jhb0430.blastagram.post.service.PostService;
 
+import jakarta.servlet.http.HttpSession;
+
 @RequestMapping("/blastagram")
 @Controller
 public class PostController {
@@ -24,10 +26,13 @@ public class PostController {
 	
 	
 	@GetMapping("/main-view")
-	 public String timeLine(Model model) {
+	 public String timeLine(Model model
+			 , HttpSession session) {
+		
+		int userId = (Integer)session.getAttribute("userId");
 		
 //		List<Post> postList = postService.getPostList();
-		List<CardDTO> cardList = postService.getPostList();
+		List<CardDTO> cardList = postService.getPostList(userId);
 		
 		model.addAttribute("cardList",cardList);
 		
@@ -39,9 +44,13 @@ public class PostController {
 	
 	
 	@GetMapping("/post-view")
-	public String post(Model model) {
+	public String post(Model model
+			 , HttpSession session
+			 ) {
 		
-		List<CardDTO> cardList = postService.getPostList();
+		int userId = (Integer)session.getAttribute("userId");
+		
+		List<CardDTO> cardList = postService.getPostList(userId);
 		
 		model.addAttribute("cardList",cardList);
 		
