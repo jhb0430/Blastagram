@@ -47,12 +47,23 @@ public class CommentController {
 		// 닉네임 받아오기 , 좋아요 받아오기 -> post의 cardList에 있음
 		// 코멘트 목록 받아오기 
 		
-		List<CardDTO> cardList = postService.getPostList(postId);	
 		// 전체 리스트에서 유저 정보 매칭되는거... 
 		// 여기서는 하나의 게시글에 대한 cardDTO 단독으로 얻어오는 기능 만들어줘야함...  코멘트뷰용 데이터
-		model.addAttribute("cardList",cardList);
+
+//		List<CardDTO> cardList = postService.getPostList(postId);	
+//		model.addAttribute("cardList",cardList);
 		
-	
+	/*
+	 * 
+// 	댓글 리스트 가져오기
+    List<Comment> commentList = commentService.getCommentList(postId);
+    model.addAttribute("commentList", commentList);
+
+// 댓글 개수 가져오기
+    int commentCount = commentService.getCommentCount(postId);
+    model.addAttribute("commentCount", commentCount);
+    
+	  */
 		
 		return "post/comment";
 	}
