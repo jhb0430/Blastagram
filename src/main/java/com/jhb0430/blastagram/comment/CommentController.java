@@ -48,7 +48,8 @@ public class CommentController {
 		// 코멘트 목록 받아오기 
 		
 		List<CardDTO> cardList = postService.getPostList(postId);	
-		
+		// 전체 리스트에서 유저 정보 매칭되는거... 
+		// 여기서는 하나의 게시글에 대한 cardDTO 단독으로 얻어오는 기능 만들어줘야함...  코멘트뷰용 데이터
 		model.addAttribute("cardList",cardList);
 		
 	
