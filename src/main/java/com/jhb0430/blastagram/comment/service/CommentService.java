@@ -1,11 +1,17 @@
 package com.jhb0430.blastagram.comment.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.jhb0430.blastagram.comment.domain.Comment;
+import com.jhb0430.blastagram.comment.dto.CommentDTO;
 import com.jhb0430.blastagram.comment.repository.CommentRepository;
+import com.jhb0430.blastagram.like.service.LikeService;
+import com.jhb0430.blastagram.post.service.PostService;
+import com.jhb0430.blastagram.user.domain.User;
+import com.jhb0430.blastagram.user.service.UserService;
 
 @Service
 public class CommentService {
@@ -13,8 +19,15 @@ public class CommentService {
 
 	private CommentRepository commentRepository;
 	
-	public CommentService(CommentRepository commentRepository) {
+	private UserService userService;
+	private LikeService likeService;
+	
+	public CommentService(CommentRepository commentRepository 
+			, UserService userService
+			,LikeService likeService) {
 		this.commentRepository = commentRepository;
+		this.userService = userService;
+		this.likeService = likeService;
 	}
 	
 	
@@ -39,12 +52,44 @@ public class CommentService {
 		}
 			
 		}
+		
+		
 	
 		// 
-		public List<Comment >getCommentList(int postId){
+		public List<CommentDTO> getCommentList(int postId){
+//			public List<Comment>getCommentList(int postId){
 			
-			return commentRepository.findByPostId(postId);
+			List<Comment> commentList =  commentRepository.findByPostId(postId);
+			
+			List<CommentDTO> commentDTOList = new ArrayList<>();
+			
+			for(Comment comment:commentList) {
+				
+				int userId= comment.getUserId();
+				User user = userService.getUserById(userId);
+				int commentCount = commentRepository.countByPostId(postId);
+				int likeCount = likeService.getLikeCount(postId);
+				
+				
+				CommentDTO commentDTO = CommentDTO.builder()
+												.commentId(comment.getId())
+												.userId(userId)
+												.userName(user.getUserName())
+												.comments(comment.getComments())
+												.commentCount(commentCount)
+												.likeCount(likeCount)
+												.build();
+				
+				commentDTOList.add(commentDTO);
+				
+			}
+			return commentDTOList;
+			
+//			return commentRepository.findByPostId(postId);
 		}
+		
+		
+		
 		
 		// 댓글 갯수 
 		public int getCommentCount(int postId){

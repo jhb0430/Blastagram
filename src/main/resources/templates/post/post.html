@@ -16,9 +16,10 @@
 						<span class="font-weight-bold text-dark abeezee-regular ml-2" >user_name</span>
 					</div>
 					<textarea class="form-control border-0" rows="10" id="contentsInput"></textarea>
-					<div class="d-flex">
-						 <input class="form-control border-0" type="file" id="fileInput">
-				 	<button type="button" class="btn btn2 col-2" id="PostBtn">입력</button>
+					<div class="d-flex justify-content-between">
+					<i class="bi bi-images h2" id="imageButton"></i>
+						 <input class="d-none" type="file" id="fileInput">
+				 	<button type="button" class="btn btn2 col-2 text-white abeezee-regular" id="PostBtn">Post</button>
 					 </div>
 				</div>
 			</div>
@@ -31,6 +32,11 @@
 		<script layout:fragment="script">
 		
 		$(document).ready(function(){
+			
+			$("#imageButton").on("click", function() {
+				$("#fileInput").click();
+			});
+			
 			
 			$("#PostBtn").on("click",function(){
 				

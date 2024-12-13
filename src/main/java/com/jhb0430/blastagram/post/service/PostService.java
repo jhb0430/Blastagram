@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jhb0430.blastagram.comment.domain.Comment;
+import com.jhb0430.blastagram.comment.dto.CommentDTO;
 import com.jhb0430.blastagram.comment.service.CommentService;
 import com.jhb0430.blastagram.common.FileManager;
 import com.jhb0430.blastagram.like.service.LikeService;
@@ -81,9 +82,9 @@ private CommentService commentService;
 			int likeCount = likeService.getLikeCount(post.getId());
 													// userId= 로그인한 사용자 정보.
 			
-			boolean isLike = likeService.isLike(post.getId(), loginUserId);		
+			boolean isLike = likeService.isLike(post.getId(),loginUserId );		
 			
-			List<Comment> commentList = commentService.getCommentList(post.getId());
+			List<CommentDTO> commentList = commentService.getCommentList(post.getId());
 			
 			CardDTO card = CardDTO.builder()
 									.postId(post.getId())
@@ -93,7 +94,7 @@ private CommentService commentService;
 									.userName(user.getUserName())
 									.likeCount(likeCount)
 									.isLike(isLike)
-									.commentList(commentList)
+									.commentDTOList(commentList)
 									.commentCount(commentCount)
 									.build();
 							
@@ -106,12 +107,32 @@ private CommentService commentService;
 	}
 	
 	// id를 입력하면  정보 찾아오는 ... 
-		 public Post getPostById(int id) {
+		 public CardDTO getPostById(int id) {
 		        
 			 Optional<Post> optionalPost = postRepository.findById(id);
-			 // DTO...기능 만들어준다 
+			 // DTO...기능 만들어준다 -> 꼭 리스트 형태가 아니어도 됨...!!! 
 //			 return postList;
-			 return optionalPost.orElse(null);
+			 Post post = optionalPost.orElse(null);
+			 
+				int userId = post.getUserId();
+				User user = userService.getUserById(userId);
+				int likeCount = likeService.getLikeCount(post.getId());
+				boolean isLike = likeService.isLike(post.getId(), id); 
+				List<CommentDTO> commentList = commentService.getCommentList(post.getId());
+				int commentCount = commentService.getCommentCount(post.getId());
+			
+				CardDTO card = CardDTO.builder().postId(post.getId())
+						 .userId(userId)
+						 .contents(post.getContents())
+						 .imagePath(post.getImagePath())
+						 .userName(user.getUserName())
+						 .likeCount(likeCount)
+						 .isLike(isLike)
+						 .commentDTOList(commentList)
+						 .commentCount(commentCount)
+						 .build();
+			 
+
 		    }
 		
 	

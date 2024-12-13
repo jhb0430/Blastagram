@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.jhb0430.blastagram.comment.dto.CommentDTO;
 import com.jhb0430.blastagram.comment.service.CommentService;
 import com.jhb0430.blastagram.like.service.LikeService;
 import com.jhb0430.blastagram.post.domain.Post;
-import com.jhb0430.blastagram.post.dto.CardDTO;
 import com.jhb0430.blastagram.post.service.PostService;
 
 @RequestMapping("/blastagram")
@@ -37,7 +37,7 @@ public class CommentController {
 	
 	
 	@GetMapping("/comment-view")
-	public String comment(@RequestParam int postId
+	public String comment(@RequestParam("postId") int postId
 			,Model model ) {
 		
 		Post post = postService.getPostById(postId);
@@ -53,17 +53,19 @@ public class CommentController {
 //		List<CardDTO> cardList = postService.getPostList(postId);	
 //		model.addAttribute("cardList",cardList);
 		
-	/*
-	 * 
-// 	댓글 리스트 가져오기
-    List<Comment> commentList = commentService.getCommentList(postId);
+// 	댓글 리스트
+	List<CommentDTO> commentList = commentService.getCommentList(postId);
     model.addAttribute("commentList", commentList);
 
+    // 좋아요 갯수
+    int likeCount = likeService.getLikeCount(postId);
+    model.addAttribute("likeCount", likeCount);
+    
+    /*
 // 댓글 개수 가져오기
     int commentCount = commentService.getCommentCount(postId);
     model.addAttribute("commentCount", commentCount);
-    
-	  */
+   */ 
 		
 		return "post/comment";
 	}

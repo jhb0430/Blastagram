@@ -7,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.jhb0430.blastagram.post.domain.Post;
 import com.jhb0430.blastagram.post.dto.CardDTO;
 import com.jhb0430.blastagram.post.service.PostService;
 

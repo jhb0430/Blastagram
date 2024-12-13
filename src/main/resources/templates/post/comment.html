@@ -11,7 +11,6 @@
 			
 			<!-- 
 			 -->
-			<th:block th:each="card:${cardList}">
 				<div class="post-image my-5 ml-3"> <!--  포스팅 이미지 정보 th:src="${post.imagePath}" src="https://cdn.pixabay.com/photo/2022/12/20/12/10/santa-7667744_1280.jpg"-->
 					<img class="post-image" th:src="${post.imagePath}"  >
 				</div>
@@ -21,7 +20,7 @@
 						<div class="d-flex align-items-center ml-3"> <!-- 포스트 한 사람 정보 -->
 							<img height="34" src="/static/icon/storyavatar.png">
 							<div class="ml-3 abeezee-regular">
-								<a href="#" class="font-weight-bold text-dark abeezee-regular mr-3" th:text="${card.userName}">user_name</a>
+								<a href="#" class="font-weight-bold text-dark abeezee-regular mr-3" th:text="${post.userName}">user_name</a>
 							</div>
 						</div>
 						
@@ -35,7 +34,7 @@
 							</div>
 							<div class="mb-3 mx-3">
 								<div class=" my-2 "> <!-- 내용란 -->
-									<a href="#" class="font-weight-bold text-dark abeezee-regular mr-3" th:text="${card.userName}">user_name</a>
+									<a href="#" class="font-weight-bold text-dark abeezee-regular mr-3">user_name</a>
 									
 									<span class="noto-sans-kr small" th:text="${post.contents}">
 									크리스마스라니~ 시간 빠르다
@@ -51,6 +50,7 @@
 						</div>
 							
 							
+					 <th:block th:each="comment:${commentList}">
 							<div class="d-flex justify-content-between p-1 mb-2"> <!--  댓글 시작부분 -->
 								<span class="d-flex small">
 									<span>
@@ -108,14 +108,14 @@
 									<i class="bi bi-bookmark"></i>
 								</div>
 							</div>
-							<div class="font-weight-bold mt-3" th:text="|좋아요 ${card.likeCount} 개|">좋아요 000개</div>
+							<div class="font-weight-bold mt-3" th:text="|좋아요 ${likeCount} 개|">좋아요 000개</div>
 							<div class="abeezee-regular small text-secondary mb-3">5 days ago</div>
 							<div class="border-top d-flex align-items-center justify-content-between">
 								<span class="my-1 p-1 d-flex">
 									<i class="bi bi-emoji-smile h4"></i>																		<!-- th:id="|commentInput${card.postId}|" -->
 									<span class="ml-2"><input type="text" class="form-control border-0 noto-sans-kr" placeholder="댓글달기" id="commentInput"></span>
 								</span>
-								<button type="button" class="btn btn-0 text-primary" id="commentBtn" th:data-post-id="${card.postId}">게시</button>
+								<button type="button" class="btn btn-0 text-primary" id="commentBtn" th:data-post-id="${post.id}">게시</button>
 							</div>
 						</div>
 					
