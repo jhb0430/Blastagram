@@ -13,6 +13,7 @@ import com.jhb0430.blastagram.comment.dto.CommentDTO;
 import com.jhb0430.blastagram.comment.service.CommentService;
 import com.jhb0430.blastagram.like.service.LikeService;
 import com.jhb0430.blastagram.post.domain.Post;
+import com.jhb0430.blastagram.post.dto.CardDTO;
 import com.jhb0430.blastagram.post.service.PostService;
 
 @RequestMapping("/blastagram")
@@ -40,9 +41,10 @@ public class CommentController {
 	public String comment(@RequestParam("postId") int postId
 			,Model model ) {
 		
-		Post post = postService.getPostById(postId);
+		CardDTO card = postService.getPostById(postId);
+//		Post post = postService.getPostById(postId);
 		
-		model.addAttribute("post",post);
+		model.addAttribute("post",card);
 		
 		// 닉네임 받아오기 , 좋아요 받아오기 -> post의 cardList에 있음
 		// 코멘트 목록 받아오기 
