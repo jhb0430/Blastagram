@@ -1,5 +1,7 @@
 package com.jhb0430.blastagram.like.service;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import com.jhb0430.blastagram.like.domain.Like;
@@ -51,6 +53,27 @@ public class LikeService {
 		}
 	}
 	
+	
+	// 좋아요 삭제 
+	public boolean deleteLike(int postId, int userId) {
+		
+		Optional<Like> optionalLike = likeRepository.findByPostIdAndUserId(postId, userId);
+		
+		if(optionalLike.isPresent()) {
+			Like like = optionalLike.get();
+			
+			likeRepository.delete(like);
+			
+			return true;
+		} else {
+			return false;
+		}
+		
+		
+		
+	
+	
+	}
 	
 }
 

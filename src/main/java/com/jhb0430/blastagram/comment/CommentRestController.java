@@ -3,6 +3,7 @@ package com.jhb0430.blastagram.comment;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,5 +47,15 @@ public class CommentRestController {
 			return resultMap;
 			
 		}
+		
+		// 코멘트 삭제하는 기능 
+		
+		@DeleteMapping("/delete")
+		public void deleteComment(
+				@RequestParam("postId") int postId){
+			
+			commentService.deleteComment(postId);
+		}
+		
 	
 }

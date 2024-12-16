@@ -45,5 +45,29 @@ public class LikeRestController {
 		
 	}
 	
+	// 좋아요 삭제 기능 
+	public Map<String, String> deleteLike(
+			@RequestParam("postId") int postId
+			,@RequestParam("userId") int userId
+			,HttpSession session){
+		
+		int userUd = (Integer)session.getAttribute("userId");
+		
+		
+		Map<String, String> resultMap = new HashMap<>();
+		
+		if(likeService.deleteLike(postId, userId)) {
+			resultMap.put("result", "success");
+		} else {
+			resultMap.put("result", "fail");
+			
+		}
+		
+		return resultMap;
+	}
+	
+	
+	
+	
 	
 }

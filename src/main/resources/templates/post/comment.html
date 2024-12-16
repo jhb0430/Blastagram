@@ -34,7 +34,7 @@
 							</div>
 							<div class="mb-3 mx-3">
 								<div class=" my-2 "> <!-- 내용란 -->
-									<a href="#" class="font-weight-bold text-dark abeezee-regular mr-3">user_name</a>
+									<a href="#" class="font-weight-bold text-dark abeezee-regular mr-3" th:text="${post.userName}">user_name</a>
 									
 									<span class="noto-sans-kr small" th:text="${post.contents}">
 									크리스마스라니~ 시간 빠르다
@@ -51,19 +51,22 @@
 							
 							
 					 <th:block th:each="comment:${commentList}">
+							
 							<div class="d-flex justify-content-between p-1 mb-2"> <!--  댓글 시작부분 -->
 								<span class="d-flex small">
 									<span>
 										<img width="25" src="/static/icon/storyavatar.png">
 									</span>
 									<div class="ml-3">
-										<a href="#" class="text-dark abeezee-regular font-weight-bold">user_comment1</a>
-											<span class="noto-sans-kr ml-3 small">블라블라 솰라솰라 블라블라 솰라솰라 블라블라 솰라솰라 블라블라 솰라솰라 블라블라 솰라솰라 블라블라 솰라솰라</span>
+										<a href="#" class="text-dark abeezee-regular font-weight-bold" th:text="${comment.userName}">user_comment2</a>
+											<span class="noto-sans-kr ml-3 small" th:text="${comment.comments}">어쩌구저쩌구 랄라라라러 웅앵웅앵 솰라솰라 대충 감동적인말 웃긴말 어쩌구저쩌구 랄라라라러 웅앵웅앵 솰라솰라 대충 감동적인말 웃긴말</span>
 										<div class="small text-secondary text-left">
 											<span class="small mr-2 noto-sans-kr"> 30분</span>
 											<span class="small mr-2 noto-sans-kr"> 좋아요 1개</span>
 											<a href="#" class="small text-secondary noto-sans-kr mr-2">답글달기</a>
-											<a href="#" class="small text-secondary abeezee-regular-italic"> See translation</a>
+											<a href="#" class="small text-secondary mr-2 abeezee-regular-italic"> See translation</a>
+											<i class="bi bi-three-dots"></i><!-- 커서 가져다대면 보이도록... modal로 삭제하기 넣기 -->
+											
 										</div>
 									</div>
 								</span>
@@ -72,35 +75,14 @@
 								</span>
 							</div> <!--  댓글 끝나는 부분 -->
 							
-							<div class="d-flex justify-content-between p-1 mb-2"> <!--  댓글 -->
-								<span class="d-flex small">
-									<span>
-										<img width="25" src="/static/icon/storyavatar.png">
-									</span>
-									<div class="ml-3">
-										<a href="#" class="text-dark abeezee-regular font-weight-bold">user_comment2</a>
-											<span class="noto-sans-kr ml-3 small">어쩌구저쩌구 랄라라라러 웅앵웅앵 솰라솰라 대충 감동적인말 웃긴말 어쩌구저쩌구 랄라라라러 웅앵웅앵 솰라솰라 대충 감동적인말 웃긴말</span>
-										<div class="small text-secondary text-left">
-											<span class="small mr-2 noto-sans-kr"> 30분</span>
-											<span class="small mr-2 noto-sans-kr"> 좋아요 1개</span>
-											<a href="#" class="small text-secondary noto-sans-kr mr-2">답글달기</a>
-											<a href="#" class="small text-secondary abeezee-regular-italic"> See translation</a>
-										</div>
-									</div>
-								</span>
-								<span class="mt-2">
-									<a href="#" class="bi bi-heart small mx-2 text-dark"></a>
-								</span>
-							</div>
-							
-							<!--  th:each = "comment:${card.commentList}" -->
+							<!--  th:each = "comment:$<i class="bi bi-three-dots"></i>{card.commentList}" -->
 							
 					</div>
 						<div class="p-2 my-1 mx-3 border-top comment-ui">
 							<div class="d-flex justify-content-between">
 								<div class="d-flex align-items-center h4 font-weight-bold">
-									<i class="bi bi-heart mr-3 text-dark"></i>
-										<i class="bi bi-heart-fill d-none mr-3 text-danger"></i>
+									<i th:unless="${post.isLike}" class="bi bi-heart mr-3 text-dark like-btn" th:data-post-id="${post.postId}"></i>
+										<i th:if="${post.isLike}" class="bi bi-heart-fill mr-3 text-danger like-btn" th:data-post-id="${post.postId}"></i>
 									<i class="bi bi-chat mr-3 text-dark" ></i>
 									<i class="bi bi-send mr-3 text-dark" ></i>	
 								</div>
@@ -115,7 +97,7 @@
 									<i class="bi bi-emoji-smile h4"></i>																		<!-- th:id="|commentInput${card.postId}|" -->
 									<span class="ml-2"><input type="text" class="form-control border-0 noto-sans-kr" placeholder="댓글달기" id="commentInput"></span>
 								</span>
-								<button type="button" class="btn btn-0 text-primary" id="commentBtn" th:data-post-id="${post.id}">게시</button>
+								<button type="button" class="btn btn-0 text-primary" id="commentBtn" th:data-post-id="${post.postId}">게시</button>
 							</div>
 						</div>
 					
@@ -133,6 +115,38 @@
 		<script layout:fragment="script">
 		
 		$(document).ready(function(){
+			
+			
+					
+			$(".like-btn").on("click", function(){
+						
+						// 이벤트가 발생한 태그 객체
+						let postId = $(this).data("post-id")
+						
+						
+						$.ajax({
+							 type:"post"
+							, url:"/post/like"
+							, data:{"postId":postId}
+							, success:function(response){
+								if(response.result =="success"){
+									location.reload();
+								} else {
+									alert("좋아요 실패")
+								}
+							}
+							, error:function(){
+									alert("좋아요 에러!!")
+								
+							}
+							
+						});
+						
+						
+					});
+					
+			
+			
 			
 			
 			$("#commentBtn").on("click",function(){

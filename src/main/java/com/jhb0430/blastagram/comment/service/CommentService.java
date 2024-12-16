@@ -2,6 +2,7 @@ package com.jhb0430.blastagram.comment.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -9,7 +10,6 @@ import com.jhb0430.blastagram.comment.domain.Comment;
 import com.jhb0430.blastagram.comment.dto.CommentDTO;
 import com.jhb0430.blastagram.comment.repository.CommentRepository;
 import com.jhb0430.blastagram.like.service.LikeService;
-import com.jhb0430.blastagram.post.service.PostService;
 import com.jhb0430.blastagram.user.domain.User;
 import com.jhb0430.blastagram.user.service.UserService;
 
@@ -97,5 +97,13 @@ public class CommentService {
 			return  commentRepository.countByPostId(postId);
 		}
 		
+		
+		// 댓글 삭제
+		// 있을수도 없을수도... 있다... 
+		public void deleteComment(int postId) {
+			
+			commentRepository.deleteByPostId(postId);
+			
+		}
 
 }

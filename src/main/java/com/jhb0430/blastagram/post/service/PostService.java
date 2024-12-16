@@ -137,6 +137,24 @@ private CommentService commentService;
 				
 		    }
 		
+		 // 로그인 한 사용자만 지울 수 있게 
+		 // 사진, 게시물 삭제 
+		 public boolean deletePost(int id, int userId) {
+			
+			 Optional<Post> optionalPost = postRepository.findById(id);
+			 
+			 if(optionalPost.isPresent()) {
+				 Post post = optionalPost.get();
+				 
+				 if(post.getUserId() == userId) {
+					 postRepository.delete(post);
+				 }
+				 
+				 return true;
+			 } else {
+				 return false;
+			 }
+		 }
 	
 	
 	
