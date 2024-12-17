@@ -3,6 +3,7 @@ package com.jhb0430.blastagram.like;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,7 +13,7 @@ import com.jhb0430.blastagram.like.service.LikeService;
 
 import jakarta.servlet.http.HttpSession;
 
-@RequestMapping("/post")
+@RequestMapping("/blastagram")
 @RestController
 public class LikeRestController {
 
@@ -46,12 +47,13 @@ public class LikeRestController {
 	}
 	
 	// 좋아요 삭제 기능 
+	@DeleteMapping("/unlike")
 	public Map<String, String> deleteLike(
 			@RequestParam("postId") int postId
-			,@RequestParam("userId") int userId
+//			,@RequestParam("userId") int userId
 			,HttpSession session){
 		
-		int userUd = (Integer)session.getAttribute("userId");
+		int userId = (Integer)session.getAttribute("userId");
 		
 		
 		Map<String, String> resultMap = new HashMap<>();

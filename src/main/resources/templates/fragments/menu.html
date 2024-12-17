@@ -12,8 +12,37 @@
 				  <li><a class="nav-link text-dark mb-2" href="#"><img width="30" src="/static/icon/liked.png" class="mr-2">알림</a></li>
 				  <li><a class="nav-link text-dark mb-2" href="/blastagram/post-view"><img width="30" src="/static/icon/add.png" class="mr-2">만들기</a></li>
 				  <li><a class="nav-link text-dark mb-2" href="#"><img width="30" src="/static/icon/storyavatar.png" class="mr-2">프로필</a></li>
-				  <li><a class="nav-link text-dark mt-5" href="#" >더보기</a></li>
+				  <li><a class="nav-link text-dark mt-5 more-btn" href="#" >더보기</a></li>
 				</ul>
 			</div>
 	</div>
 </div>
+
+<!--  더보기에 로그아웃 기능 추가하기 
+<div class="modal fade col-8 col-sm-6" id="moreModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered" role="document">
+		    <div class="modal-content">
+		      
+		      <div class="modal-body text-center">
+		        <a href="/blastagram/logout" id="logoutBtn">로그아웃</a>
+		      </div>
+		      
+		    </div>
+		  </div>
+		</div>
+		
+
+			$(document).ready(function(){
+			
+			
+			
+			$(".more-btn").on("click",function(){
+				
+				$("#logoutBtn").data("post-id",postId);
+				
+			});
+				
+-->
+				
+			});
+			

@@ -24,7 +24,7 @@
 								 -->
 							</div>
 						</div>
-						<div class="m-2"><a href="#"><img width="30" src="/static/icon/etc.png"></a></div>
+						<div class="m-2"><img width="30" th:if="${card.userId == session.userId}" src="/static/icon/etc.png" data-toggle="modal" data-target="#moreModal" th:data-post-id="${card.postId}" class="more-btn"></div>
 					</div>
 					<div> <!--  image -->
 						<img class="post-image" th:src="${card.imagePath}">
@@ -32,7 +32,7 @@
 					<div class="d-flex justify-content-between p-1 my-1">
 						<div class="d-flex align-items-center h4 font-weight-bold">
 							<i th:unless="${card.isLike}" class="bi bi-heart mr-3 text-dark like-btn" th:data-post-id="${card.postId}"></i>
-								<i th:if="${card.isLike}" class="bi bi-heart-fill mr-3 text-danger like-btn" th:data-post-id="${card.postId}"></i>
+								<i th:if="${card.isLike}" class="bi bi-heart-fill mr-3 text-danger unlike-btn" th:data-post-id="${card.postId}"></i>
 							<a th:href="|/blastagram/comment-view?${card.postId}|" class="bi bi-chat mr-3 text-dark" style="text-decoration:none"></a>
 							<a href="#" class="bi bi-send mr-3 text-dark" style="text-decoration:none"></a>
 						</div>
@@ -48,7 +48,7 @@
 							<div class="noto-sans-kr" th:if="${card.contents == 'null'}"> </div>
 						</div>
 						<div> <!--  댓글 -->
-							<div class="mt-4"><a th:href="|/blastagram/comment-view?postId=${card.postId}|" class="text-secondary" th:text="|View all ${card.commentCount} comments|">View all 3 comments</a></div>
+							<div class="mt-4"><a th:if="${card.commentCount != 0}" th:href="|/blastagram/comment-view?postId=${card.postId}|" class="text-secondary" th:text="|View all ${card.commentCount} comments|">View all 3 comments</a></div>
 						</div>
 						<div class="d-flex">
 							<div class="abeezee-regular">5 days ago</div>
@@ -60,25 +60,18 @@
 			</div>			
 			
 			<!--  게시글 삭제하기  -->
-			<div class="modal" tabindex="-1">
-			  <div class="modal-dialog">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <h5 class="modal-title">Modal title</h5>
-			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			          <span aria-hidden="true">&times;</span>
-			        </button>
-			      </div>
-			      <div class="modal-body">
-			        <p>Modal body text goes here.</p>
-			      </div>
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			        <button type="button" class="btn btn-primary">Save changes</button>
-			      </div>
-			    </div>
-			  </div>
-			</div>
+			<!-- Modal -->
+		<div class="modal fade" id="moreModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered" role="document">
+		    <div class="modal-content">
+		      
+		      <div class="modal-body text-center">
+		        <a href="#" id="deleteBtn">삭제하기</a>
+		      </div>
+		      
+		    </div>
+		  </div>
+		</div>
 						
 			
 			
@@ -94,15 +87,65 @@
 				
 				
 				let postId = $(this).data("post-id");
+				
+				// alert(postId);
 				// modal 의 삭제 버튼인 a태그에 data-post-id 값을 추가한다
 				$("#deleteBtn").data("post-id",postId);
 				
 			});
 			
+			
+			
 			$("#deleteBtn").on("click",function(){
 				
-				$.ajax({});
+				let postId = $(this).data("post-id");
 				
+				// alert(postId); 값 안뜨면 alert로 확인하기 꼭~~~~
+				
+				$.ajax({
+					type:"delete"
+					, url:"/blastagram/delete"
+					, data:{"id":postId}
+					, success:function(response) {
+						
+						if(response.result == "success") {
+							location.reload();
+						} else {
+							alert("삭제 실패!");
+						}
+						
+					}
+					, error:function() {
+						alert("삭제 에러!");
+					}
+				});
+				
+			});
+			
+			
+			
+			// 좋아요 취소 기능
+			$(".unlikeBtn").on("click",function(){
+				
+				let postId = $(this).data("post-id");
+				
+				$.ajax({
+					type:"delete"
+					,url:"/blastagram/unlike"
+					, data:{"postId":postId}
+				, success:function(response){
+					if(response.result == "success") {
+						location.reload();
+					} else {
+						alert("좋아요 취소 실패");
+					}
+				}
+				, error:function() {
+					alert("좋아요 취소 에러!");
+				}
+				
+					
+				});
 				
 			});
 			
@@ -111,12 +154,12 @@
 			$(".like-btn").on("click", function(){
 				
 				// 이벤트가 발생한 태그 객체
-				let postId = $(this).data("post-id")
+				let postId = $(this).data("post-id");
 				
 				
 				$.ajax({
 					 type:"post"
-					, url:"/post/like"
+					, url:"/blastagram/like"
 					, data:{"postId":postId}
 					, success:function(response){
 						if(response.result =="success"){

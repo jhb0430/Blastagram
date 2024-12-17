@@ -3,6 +3,7 @@ package com.jhb0430.blastagram.post;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -51,6 +52,7 @@ public class PostRestController {
 		
 	}
 	
+	@DeleteMapping("/delete")
 	public Map<String, String> deletePost(
 			@RequestParam("id") int id
 			, HttpSession session
